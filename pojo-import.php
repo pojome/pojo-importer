@@ -70,11 +70,18 @@ final class Pojo_Import {
 		return self::$_instance;
 	}
 
+	public function register_settings() {
+		include( 'includes/class-pojo-import-settings.php' );
+		new Pojo_Import_Settings();
+	}
+
 	public function bootstrap() {
 		// This plugin for Pojo Themes..
 		// TODO: Add notice for non-pojo theme
 		if ( ! class_exists( 'Pojo_Core' ) )
 			return;
+
+		add_action( 'pojo_framework_base_settings_included', array( &$this, 'register_settings' ) );
 		
 		include( 'includes/class-pojo-import-actions.php' );
 		

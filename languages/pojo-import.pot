@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-import 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-08 19:11+0200\n"
+"POT-Creation-Date: 2015-01-11 17:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: includes/class-pojo-import-handler.php:26
+#: includes/class-pojo-import-handler.php:54
 #: includes/wordpress-importer/wordpress-importer.php:866
 msgid "Invalid file type"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:27
+msgid "English"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:28
+msgid "Hebrew"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:39
+#: includes/class-pojo-import-settings.php:40
+#: includes/class-pojo-import-settings.php:79
+msgid "Import"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:56
+msgid "Import Content"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:68
+msgid "Lang:"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:78
+msgid "Desc text...."
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:113
+msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
 #: includes/wordpress-importer/parsers.php:42

@@ -3,23 +3,22 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Pojo_Import_Actions {
 
-	public function init() {
-		if ( empty( $_GET['ys-import-test'] ) )
-			return;
-		
+	public function get_content_path() {
+		return get_template_directory() . '/assets/demo/content.xml';
+	}
+
+	public function do_import() {
 		$this->setup_import();
 		
 		ob_start();
 		
 		$import = new Pojo_Import_Handler();
 		$import->fetch_attachments = true;
-		$import->import( dirname( __FILE__ ) . '/file.xml' );
+		$import->import( $this->get_content_path() );
 		
 		$import_log = ob_get_clean();
 		
-		
-		
-		die;
+		return $import_log;
 	}
 
 	public function setup_import() {
@@ -35,8 +34,6 @@ class Pojo_Import_Actions {
 		require_once( 'class-pojo-import-handler.php' );
 	}
 
-	public function __construct() {
-		add_action( 'admin_init', array( &$this, 'init' ) );
-	}
+	public function __construct() {}
 	
 }
