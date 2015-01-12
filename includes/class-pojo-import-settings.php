@@ -109,6 +109,8 @@ class Pojo_Import_Settings {
 	}
 	
 	public function ajax_pojo_do_import() {
+		global $wpdb;
+		
 		if ( ! check_ajax_referer( 'pojo-import-content', '_nonce', false ) || ! current_user_can( $this->_capability ) ) {
 			wp_die( __( 'You do not have sufficient permissions to access this page.', 'pojo-import' ) );
 		}
@@ -161,6 +163,23 @@ class Pojo_Import_Settings {
 			}
 		}
 		set_theme_mod( 'nav_menu_locations', $nav_menu_locations );
+		
+		// Set Home Page
+		$home_page_id = $wpdb->get_var(
+			$wpdb->prepare(
+				'SELECT `ID` FROM %1$s
+					WHERE `post_name` = \'%2$s\'
+						AND `post_type` = \'page\'
+				;',
+				$wpdb->posts,
+				'homepage'
+			)
+		);
+		
+		if ( ! is_null( $home_page_id ) ) {
+			update_option( 'show_on_front', 'page' );
+			update_option( 'page_on_front', $home_page_id );
+		}
 		
 		echo $import_log;
 		
