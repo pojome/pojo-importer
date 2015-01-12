@@ -128,8 +128,8 @@ class Pojo_Import_Settings {
 			return;
 		?>
 		<script type="text/javascript">
-			jQuery( document ).ready( function( $ ) {
-				$( '#pojo-import-content' ).on( 'submit', function( e ) {
+			jQuery( document ).ready( function($) {
+				$( '#pojo-import-content' ).on( 'submit', function(e) {
 					var $thisForm = $( this );
 					$thisForm
 						.fadeOut( 'fast' )
