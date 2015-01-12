@@ -181,6 +181,26 @@ class Pojo_Import_Settings {
 			update_option( 'page_on_front', $home_page_id );
 		}
 		
+		$placeholder_ids = $import->generate_placeholders();
+		if ( ! empty( $placeholder_ids ) ) {
+			$meta_key = 'gallery_gallery';
+			$galleries_ids = $wpdb->get_col(
+				$wpdb->prepare(
+					'SELECT `post_id` FROM `%1$s`
+						WHERE `meta_key` LIKE \'%2$s\'
+					;',
+					$wpdb->postmeta,
+					$meta_key
+				)
+			);
+			
+			if ( ! empty( $galleries_ids ) ) {
+				foreach ( $galleries_ids as $gallery_id ) {
+					update_post_meta( $gallery_id, $meta_key, implode( ',', $placeholder_ids ) );
+				}
+			}
+		}
+		
 		echo $import_log;
 		
 		die();

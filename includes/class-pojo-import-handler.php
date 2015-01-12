@@ -7,6 +7,8 @@ class Pojo_Import_Handler extends WP_Import {
 
 	protected $placeholder_image_id = null;
 	
+	protected $placeholder_ids = array();
+	
 	protected function _get_placeholder_from_media() {
 		global $wpdb;
 		
@@ -25,6 +27,45 @@ class Pojo_Import_Handler extends WP_Import {
 			return $post_id;
 		
 		return false;
+	}
+
+	public function generate_placeholders() {
+		if ( empty( $this->placeholder_ids ) ) {
+			if ( ! function_exists( 'WP_Filesystem' ) )
+				require_once ABSPATH . 'wp-admin/includes/file.php';
+
+			global $wp_filesystem;
+			WP_Filesystem();
+			
+			foreach ( range( 1, 5 ) as $index ) {
+				$upload = wp_upload_bits(
+					sprintf( 'pojo-placeholder-%d.png', $index ),
+					null,
+					$wp_filesystem->get_contents( POJO_IMPORT_ASSETS_PATH . sprintf( 'images/placeholder-%d.png', $index ) )
+				);
+
+				$post = array();
+				$info = wp_check_filetype( $upload['file'] );
+				if ( $info )
+					$post['post_mime_type'] = $info['type'];
+				else
+					continue;
+
+				$post['post_title'] = self::PLACEHOLDER_SLUG . '-' . $index;
+				$post['post_name']  = self::PLACEHOLDER_SLUG . '-' . $index;
+
+				$post['guid'] = $upload['url'];
+				$post_id      = wp_insert_attachment( $post, $upload['file'] );
+				wp_update_attachment_metadata(
+					$post_id,
+					wp_generate_attachment_metadata( $post_id, $upload['file'] )
+				);
+
+				$this->placeholder_ids[] = $post_id;
+			}
+		}
+		
+		return $this->placeholder_ids;
 	}
 
 	public function process_attachment( $post, $url ) {
