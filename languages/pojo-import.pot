@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-import 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 17:53+0200\n"
+"POT-Creation-Date: 2015-01-12 16:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: includes/class-pojo-import-handler.php:54
+#: includes/class-pojo-import-handler.php:95
 #: includes/wordpress-importer/wordpress-importer.php:866
 msgid "Invalid file type"
 msgstr ""
@@ -30,25 +30,45 @@ msgstr ""
 msgid "Hebrew"
 msgstr ""
 
-#: includes/class-pojo-import-settings.php:39
-#: includes/class-pojo-import-settings.php:40
-#: includes/class-pojo-import-settings.php:79
+#: includes/class-pojo-import-settings.php:43
+#: includes/class-pojo-import-settings.php:44
+#: includes/class-pojo-import-settings.php:115
 msgid "Import"
 msgstr ""
 
-#: includes/class-pojo-import-settings.php:56
+#: includes/class-pojo-import-settings.php:57
 msgid "Import Content"
 msgstr ""
 
-#: includes/class-pojo-import-settings.php:68
+#: includes/class-pojo-import-settings.php:69
 msgid "Lang:"
 msgstr ""
 
-#: includes/class-pojo-import-settings.php:78
+#: includes/class-pojo-import-settings.php:81
+msgid "Content (Pages, Posts, Galleries, Slideshows, etc)"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:88
+msgid "Widgets"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:95
+msgid "Customizer"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:102
+msgid "Menus"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:109
+msgid "Setup Front Page"
+msgstr ""
+
+#: includes/class-pojo-import-settings.php:114
 msgid "Desc text...."
 msgstr ""
 
-#: includes/class-pojo-import-settings.php:113
+#: includes/class-pojo-import-settings.php:150
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
