@@ -41,7 +41,7 @@ class Pojo_Import_Settings {
 	
 	public function register_menu() {
 		add_submenu_page(
-			'pojo-general',
+			'pojo-home',
 			__( 'Demo Import', 'pojo-import' ),
 			__( 'Demo Import', 'pojo-import' ),
 			$this->_capability,
@@ -128,17 +128,17 @@ class Pojo_Import_Settings {
 			return;
 		?>
 		<script type="text/javascript">
-			jQuery( document ).ready( function($) {
+			jQuery( document ).ready( function($) {				
 				$( '#pojo-import-content' ).on( 'submit', function(e) {
 					var $thisForm = $( this );
 					$thisForm
 						.fadeOut( 'fast' )
-						.after( '<div class="pojo-loading"><?php _e( 'Loading', 'pojo-import' ); ?>..</div>' );
+						.after( '<div class="pojo-loading"><span class="spinner"></span> <?php _e( 'Loading', 'pojo-import' ); ?>..</div>' );
 					
 					$.post( ajaxurl, $thisForm.serialize(), function( msg ) {
 						$( 'div.pojo-loading' ).fadeOut( 'fast' );
 						//$thisForm.after( msg );
-						$thisForm.after( '<p><?php _e( 'All done. Have fun!', 'pojo-import' ); ?></p>' );
+						$thisForm.after( '<p><?php printf( __( 'All done. <a href="%s">Have fun!</a>', 'pojo-import' ), home_url() ); ?></p>' );
 					} );
 					return false;
 				} );
@@ -192,6 +192,8 @@ class Pojo_Import_Settings {
 					}
 				}
 			}
+
+			update_option( 'pojo_has_import_content_data_' . strtolower( Pojo_Core::instance()->licenses->updater->theme_name ), 'true' );
 		}
 		
 		if ( isset( $_POST['customizer'] ) && 'yes' === $_POST['customizer'] ) {
@@ -261,6 +263,7 @@ class Pojo_Import_Settings {
 				update_option( 'page_on_front', $home_page_id );
 			}
 		}
+		
 		echo $import_log;
 		
 		die();

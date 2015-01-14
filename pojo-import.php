@@ -26,11 +26,6 @@ final class Pojo_Import {
 	 */
 	private static $_instance = null;
 
-	/**
-	 * @var Pojo_Import_Actions
-	 */
-	public $actions;
-
 	public function load_textdomain() {
 		load_plugin_textdomain( 'pojo-import', false, basename( dirname( __FILE__ ) ) . '/languages' );
 	}
@@ -82,10 +77,6 @@ final class Pojo_Import {
 			return;
 
 		add_action( 'pojo_framework_base_settings_included', array( &$this, 'register_settings' ) );
-		
-		include( 'includes/class-pojo-import-actions.php' );
-		
-		$this->actions = new Pojo_Import_Actions();
 	}
 
 	private function __construct() {
