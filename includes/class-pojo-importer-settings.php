@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class Pojo_Import_Settings {
+class Pojo_Importer_Settings {
 	
 	protected $_capability = 'manage_options';
 	
@@ -17,13 +17,13 @@ class Pojo_Import_Settings {
 		if ( ! class_exists( 'WP_Import' ) )
 			require_once( dirname( __FILE__ ) . '/wordpress-importer/wordpress-importer.php' );
 
-		require_once( 'class-pojo-import-handler.php' );
+		require_once( 'class-pojo-importer-handler.php' );
 	}
 
 	public function get_content_langs() {
 		return array(
-			'en' => __( 'English', 'pojo-import' ),
-			'he' => __( 'Hebrew', 'pojo-import' ),
+			'en' => __( 'English', 'pojo-importer' ),
+			'he' => __( 'Hebrew', 'pojo-importer' ),
 		);
 	}
 
@@ -42,8 +42,8 @@ class Pojo_Import_Settings {
 	public function register_menu() {
 		add_submenu_page(
 			'pojo-home',
-			__( 'Demo Import', 'pojo-import' ),
-			__( 'Demo Import', 'pojo-import' ),
+			__( 'Demo Import', 'pojo-importer' ),
+			__( 'Demo Import', 'pojo-importer' ),
 			$this->_capability,
 			'pojo-import',
 			array( &$this, 'display_page' )
@@ -56,21 +56,21 @@ class Pojo_Import_Settings {
 		<div class="wrap">
 
 			<div id="icon-themes" class="icon32"></div>
-			<h2><?php _e( 'Demo Import', 'pojo-import' ); ?></h2>
+			<h2><?php _e( 'Demo Import', 'pojo-importer' ); ?></h2>
 
-			<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and Front Page.', 'pojo-import' ); ?></p>
+			<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and Front Page.', 'pojo-importer' ); ?></p>
 			
-			<p><?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-import' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
+			<p><?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-importer' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
 			
-			<p style="color: #ff0000;"><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-import' ); ?></p>
+			<p style="color: #ff0000;"><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
 			
-			<form id="pojo-import-content">
+			<form id="pojo-importer-content">
 				<input type="hidden" name="action" value="pojo_do_import" />
-				<input type="hidden" name="_nonce" value="<?php echo wp_create_nonce( 'pojo-import-content' ) ?>" />
+				<input type="hidden" name="_nonce" value="<?php echo wp_create_nonce( 'pojo-importer-content' ) ?>" />
 				
 				<div>
 					<label>
-						<?php _e( 'Choose your language', 'pojo-import' ); ?>:
+						<?php _e( 'Choose your language', 'pojo-importer' ); ?>:
 						<select name="lang">
 							<?php foreach ( $this->get_content_langs() as $lang_key => $lang_title ) : ?>
 								<option value="<?php echo $lang_key; ?>"><?php echo $lang_title; ?></option>
@@ -82,40 +82,40 @@ class Pojo_Import_Settings {
 				<div>
 					<label>
 						<input type="checkbox" name="content" value="yes" checked />
-						<?php _e( 'The demo content (posts, pages, galleries, slideshows, WooCommerce)', 'pojo-import' ); ?>
+						<?php _e( 'The demo content (posts, pages, galleries, slideshows, WooCommerce)', 'pojo-importer' ); ?>
 					</label>
 				</div>
 				
 				<div>
 					<label>
 						<input type="checkbox" name="widgets" value="yes" checked />
-						<?php _e( 'Widgets', 'pojo-import' ); ?>
+						<?php _e( 'Widgets', 'pojo-importer' ); ?>
 					</label>
 				</div>
 				
 				<div>
 					<label>
 						<input type="checkbox" name="menus" value="yes" checked />
-						<?php _e( 'Menus', 'pojo-import' ); ?>
+						<?php _e( 'Menus', 'pojo-importer' ); ?>
 					</label>
 				</div>
 				
 				<div>
 					<label>
 						<input type="checkbox" name="customizer" value="yes" checked />
-						<?php _e( 'Customizer', 'pojo-import' ); ?>
+						<?php _e( 'Customizer', 'pojo-importer' ); ?>
 					</label>
 				</div>
 				
 				<div>
 					<label>
 						<input type="checkbox" name="front_page" value="yes" checked />
-						<?php _e( 'Front Page', 'pojo-import' ); ?>
+						<?php _e( 'Front Page', 'pojo-importer' ); ?>
 					</label>
 				</div>
 				
 				<div>
-					<p><button type="submit" class="button"><?php _e( 'Import', 'pojo-import' ); ?></button></p>
+					<p><button type="submit" class="button"><?php _e( 'Import', 'pojo-importer' ); ?></button></p>
 				</div>
 			</form>
 			
@@ -129,16 +129,16 @@ class Pojo_Import_Settings {
 		?>
 		<script type="text/javascript">
 			jQuery( document ).ready( function($) {				
-				$( '#pojo-import-content' ).on( 'submit', function(e) {
+				$( '#pojo-importer-content' ).on( 'submit', function(e) {
 					var $thisForm = $( this );
 					$thisForm
 						.fadeOut( 'fast' )
-						.after( '<div class="pojo-loading"><span class="spinner"></span> <?php _e( 'Loading', 'pojo-import' ); ?>..</div>' );
+						.after( '<div class="pojo-loading"><span class="spinner"></span> <?php _e( 'Loading', 'pojo-importer' ); ?>..</div>' );
 					
 					$.post( ajaxurl, $thisForm.serialize(), function( msg ) {
 						$( 'div.pojo-loading' ).fadeOut( 'fast' );
 						//$thisForm.after( msg );
-						$thisForm.after( '<p><?php printf( __( 'All done. <a href="%s">Have fun!</a>', 'pojo-import' ), home_url() ); ?></p>' );
+						$thisForm.after( '<p><?php printf( __( 'All done. <a href="%s">Have fun!</a>', 'pojo-importer' ), home_url() ); ?></p>' );
 					} );
 					return false;
 				} );
@@ -150,8 +150,8 @@ class Pojo_Import_Settings {
 	public function ajax_pojo_do_import() {
 		global $wpdb;
 		
-		if ( ! check_ajax_referer( 'pojo-import-content', '_nonce', false ) || ! current_user_can( $this->_capability ) ) {
-			wp_die( __( 'You do not have sufficient permissions to access this page.', 'pojo-import' ) );
+		if ( ! check_ajax_referer( 'pojo-importer-content', '_nonce', false ) || ! current_user_can( $this->_capability ) ) {
+			wp_die( __( 'You do not have sufficient permissions to access this page.', 'pojo-importer' ) );
 		}
 		
 		$langs = $this->get_content_langs();
@@ -166,7 +166,7 @@ class Pojo_Import_Settings {
 			// Content:
 			ob_start();
 
-			$import                    = new Pojo_Import_Handler();
+			$import                    = new Pojo_Importer_Handler();
 			$import->fetch_attachments = true;
 			$import->import( $this->get_content_path( $_POST['lang'] ) );
 

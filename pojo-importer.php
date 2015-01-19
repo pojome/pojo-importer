@@ -1,33 +1,33 @@
 <?php
 /*
-Plugin Name: Pojo Import
+Plugin Name: Pojo Importer
 Plugin URI: http://pojo.me/
 Description: Import all the demo content (Posts, Pages, Galleries, Slideshows), Widgets, Menus, Customizer and Front Page.
 Author: Pojo Team
 Author URI: http://pojo.me/
 Version: 1.0.0
-Text Domain: pojo-import
+Text Domain: pojo-importer
 Domain Path: /languages/
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-define( 'POJO_IMPORT__FILE__', __FILE__ );
-define( 'POJO_IMPORT_BASE', plugin_basename( POJO_IMPORT__FILE__ ) );
-define( 'POJO_IMPORT_URL', plugins_url( '/', POJO_IMPORT__FILE__ ) );
-define( 'POJO_IMPORT_ASSETS_PATH', plugin_dir_path( POJO_IMPORT__FILE__ ) . 'assets/' );
-define( 'POJO_IMPORT_ASSETS_URL', POJO_IMPORT_URL . 'assets/' );
+define( 'POJO_IMPORTER__FILE__', __FILE__ );
+define( 'POJO_IMPORTER_BASE', plugin_basename( POJO_IMPORTER__FILE__ ) );
+define( 'POJO_IMPORTER_URL', plugins_url( '/', POJO_IMPORTER__FILE__ ) );
+define( 'POJO_IMPORTER_ASSETS_PATH', plugin_dir_path( POJO_IMPORTER__FILE__ ) . 'assets/' );
+define( 'POJO_IMPORTER_ASSETS_URL', POJO_IMPORTER_URL . 'assets/' );
 
-final class Pojo_Import {
+final class Pojo_Importer {
 
 	/**
-	 * @var Pojo_Import The one true Pojo_Import
+	 * @var Pojo_Importer The one true Pojo_Importer
 	 * @since 1.0.0
 	 */
 	private static $_instance = null;
 
 	public function load_textdomain() {
-		load_plugin_textdomain( 'pojo-import', false, basename( dirname( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'pojo-importer', false, basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 
 	/**
@@ -41,7 +41,7 @@ final class Pojo_Import {
 	 */
 	public function __clone() {
 		// Cloning instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'pojo-import' ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'pojo-importer' ), '1.0.0' );
 	}
 
 	/**
@@ -52,22 +52,22 @@ final class Pojo_Import {
 	 */
 	public function __wakeup() {
 		// Unserializing instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'pojo-import' ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'pojo-importer' ), '1.0.0' );
 	}
 
 	/**cd
-	 * @return Pojo_Import
+	 * @return Pojo_Importer
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) )
-			self::$_instance = new Pojo_Import();
+			self::$_instance = new Pojo_Importer();
 
 		return self::$_instance;
 	}
 
 	public function register_settings() {
-		include( 'includes/class-pojo-import-settings.php' );
-		new Pojo_Import_Settings();
+		include( 'includes/class-pojo-importer-settings.php' );
+		new Pojo_Importer_Settings();
 	}
 
 	public function bootstrap() {
@@ -86,5 +86,5 @@ final class Pojo_Import {
 
 }
 
-Pojo_Import::instance();
-// EOF
+Pojo_Importer::instance();
+// EOF/ EOF

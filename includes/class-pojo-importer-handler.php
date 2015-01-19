@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class Pojo_Import_Handler extends WP_Import {
+class Pojo_Importer_Handler extends WP_Import {
 
 	const PLACEHOLDER_SLUG = 'pojo-placeholder';
 
@@ -41,7 +41,7 @@ class Pojo_Import_Handler extends WP_Import {
 				$upload = wp_upload_bits(
 					sprintf( 'pojo-placeholder-%d.png', $index ),
 					null,
-					$wp_filesystem->get_contents( POJO_IMPORT_ASSETS_PATH . sprintf( 'images/placeholder-%d.png', $index ) )
+					$wp_filesystem->get_contents( POJO_IMPORTER_ASSETS_PATH . sprintf( 'images/placeholder-%d.png', $index ) )
 				);
 
 				$post = array();
@@ -85,14 +85,14 @@ class Pojo_Import_Handler extends WP_Import {
 			$upload = wp_upload_bits(
 				'pojo-placeholder.png',
 				null,
-				$wp_filesystem->get_contents( POJO_IMPORT_ASSETS_PATH . 'images/placeholder.png' )
+				$wp_filesystem->get_contents( POJO_IMPORTER_ASSETS_PATH . 'images/placeholder.png' )
 			);
 
 			$info = wp_check_filetype( $upload['file'] );
 			if ( $info )
 				$post['post_mime_type'] = $info['type'];
 			else
-				return new WP_Error( 'attachment_processing_error', __( 'Invalid file type', 'pojo-import' ) );
+				return new WP_Error( 'attachment_processing_error', __( 'Invalid file type', 'pojo-importer' ) );
 			
 			$post['post_title'] = self::PLACEHOLDER_SLUG;
 			$post['post_name'] = self::PLACEHOLDER_SLUG;

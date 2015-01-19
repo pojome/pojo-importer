@@ -14,7 +14,7 @@ module.exports = function( grunt ) {
 		checktextdomain: {
 			standard: {
 				options:{
-					text_domain: 'pojo-import',
+					text_domain: 'pojo-importer',
 					correct_domain: true,
 					keywords: [
 						// WordPress keywords
@@ -50,7 +50,7 @@ module.exports = function( grunt ) {
 
 		pot: {
 			options:{
-				text_domain: 'pojo-import',
+				text_domain: 'pojo-importer',
 				dest: 'languages/',
 				keywords: [
 					// WordPress keywords
