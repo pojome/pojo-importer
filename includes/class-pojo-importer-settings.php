@@ -45,7 +45,7 @@ class Pojo_Importer_Settings {
 			__( 'Demo Import', 'pojo-importer' ),
 			__( 'Demo Import', 'pojo-importer' ),
 			$this->_capability,
-			'pojo-import',
+			'pojo-importer',
 			array( &$this, 'display_page' )
 		);
 	}
