@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pojo-import 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-12 16:39+0200\n"
-"PO-Revision-Date: 2015-01-19 14:53+0200\n"
+"PO-Revision-Date: 2015-01-19 15:49+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: he_IL\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.7.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: includes/class-pojo-import-handler.php:95
@@ -45,11 +45,11 @@ msgstr "ייבוא"
 
 #: includes/class-pojo-import-settings.php:57
 msgid "Import Content"
-msgstr ""
+msgstr "ייבוא תוכן"
 
 #: includes/class-pojo-import-settings.php:69
 msgid "Lang:"
-msgstr ""
+msgstr "שפה:"
 
 #: includes/class-pojo-import-settings.php:81
 msgid "Content (Pages, Posts, Galleries, Slideshows, etc)"
@@ -105,7 +105,7 @@ msgstr ""
 #: includes/wordpress-importer/wordpress-importer.php:198
 #: includes/wordpress-importer/wordpress-importer.php:207
 msgid "Sorry, there has been an error."
-msgstr ""
+msgstr "מצטערים, אירעה שגיאה."
 
 #: includes/wordpress-importer/wordpress-importer.php:135
 msgid "The file does not exist, please try again."
@@ -113,11 +113,11 @@ msgstr ""
 
 #: includes/wordpress-importer/wordpress-importer.php:178
 msgid "All done."
-msgstr ""
+msgstr "הכל בוצע. "
 
 #: includes/wordpress-importer/wordpress-importer.php:178
 msgid "Have fun!"
-msgstr ""
+msgstr "תהנה!"
 
 #: includes/wordpress-importer/wordpress-importer.php:179
 msgid "Remember to update the passwords and roles of imported users."
@@ -174,7 +174,7 @@ msgstr ""
 
 #: includes/wordpress-importer/wordpress-importer.php:286
 msgid "Submit"
-msgstr ""
+msgstr "שליחה"
 
 #: includes/wordpress-importer/wordpress-importer.php:299
 msgid "Import author:"
@@ -186,7 +186,7 @@ msgstr ""
 
 #: includes/wordpress-importer/wordpress-importer.php:313
 msgid "as a new user:"
-msgstr ""
+msgstr "כמשתמש חדש"
 
 #: includes/wordpress-importer/wordpress-importer.php:321
 msgid "assign posts to an existing user:"
@@ -198,7 +198,7 @@ msgstr ""
 
 #: includes/wordpress-importer/wordpress-importer.php:324
 msgid "- Select -"
-msgstr ""
+msgstr "-בחירה-"
 
 #: includes/wordpress-importer/wordpress-importer.php:374
 #, php-format
@@ -275,7 +275,7 @@ msgstr ""
 
 #: includes/wordpress-importer/wordpress-importer.php:1033
 msgid "Import WordPress"
-msgstr ""
+msgstr "ייבוא וורדפרס"
 
 #: includes/wordpress-importer/wordpress-importer.php:1040
 #, php-format
