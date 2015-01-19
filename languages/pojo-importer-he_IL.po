@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pojo-import 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-19 16:02+0200\n"
-"PO-Revision-Date: 2015-01-19 18:06+0200\n"
+"PO-Revision-Date: 2015-01-19 20:03+0200\n"
 "Last-Translator: Yakir Sitbon <yakir@pojo.me>\n"
 "Language-Team: he_IL <LL@li.org>\n"
 "Language: he_IL\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.7.1\n"
+"X-Generator: Poedit 1.7.3\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: includes/class-pojo-import-handler.php:95
@@ -41,7 +41,7 @@ msgstr "עברית"
 #: includes/class-pojo-import-settings.php:46
 #: includes/class-pojo-import-settings.php:59
 msgid "Demo Import"
-msgstr "תוכן דמו"
+msgstr "יבוא דמו"
 
 #: includes/class-pojo-import-settings.php:61
 msgid ""
