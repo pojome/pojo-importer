@@ -59,10 +59,10 @@ class Pojo_Import_Settings {
 			<h2><?php _e( 'Demo Import', 'pojo-import' ); ?></h2>
 
 			<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and Front Page.', 'pojo-import' ); ?></p>
-
+			
 			<p><?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-import' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
-
-			<p style="color: #ff0000;"><?php _e( 'Note: Due to copyright reasons, demo images will be replaced with a placeholder image‏.', 'pojo-import' ); ?></p>
+			
+			<p style="color: #ff0000;"><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-import' ); ?></p>
 			
 			<form id="pojo-import-content">
 				<input type="hidden" name="action" value="pojo_do_import" />
@@ -70,7 +70,7 @@ class Pojo_Import_Settings {
 				
 				<div>
 					<label>
-						<?php _e( 'Choose your language' ,'pojo-import' ); ?>:
+						<?php _e( 'Choose your language', 'pojo-import' ); ?>:
 						<select name="lang">
 							<?php foreach ( $this->get_content_langs() as $lang_key => $lang_title ) : ?>
 								<option value="<?php echo $lang_key; ?>"><?php echo $lang_title; ?></option>
