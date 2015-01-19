@@ -2,7 +2,7 @@
 /*
 Plugin Name: Pojo Import
 Plugin URI: http://pojo.me/
-Description: ...
+Description: Import all the demo content (Posts, Pages, Galleries, Slideshows), Widgets, Menus, Customizer and Front Page.
 Author: Pojo Team
 Author URI: http://pojo.me/
 Version: 1.0.0
