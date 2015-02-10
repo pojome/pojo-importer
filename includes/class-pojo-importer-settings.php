@@ -8,6 +8,9 @@ class Pojo_Importer_Settings {
 	protected $_print_footer_scripts = false;
 
 	public function setup_import() {
+		if ( defined( 'WP_LOAD_IMPORTERS' ) )
+			return;
+		
 		define( 'WP_LOAD_IMPORTERS', true );
 
 		require_once ABSPATH . 'wp-admin/includes/taxonomy.php';
@@ -25,6 +28,14 @@ class Pojo_Importer_Settings {
 			'en' => __( 'English', 'pojo-importer' ),
 			'he' => __( 'Hebrew', 'pojo-importer' ),
 		);
+	}
+
+	public function get_files_list() {
+		$path = get_template_directory() . '/assets/demo/files.php';
+		if ( file_exists( $path ) )
+			return require( $path );
+		
+		return array();
 	}
 
 	public function get_content_path( $lang ) {
@@ -114,6 +125,15 @@ class Pojo_Importer_Settings {
 					</label>
 				</div>
 				
+				<?php if ( Pojo_Compatibility::is_revslider_installer() ) : ?>
+					<div>
+						<label>
+							<input type="checkbox" name="revslider" value="yes" checked />
+							<?php _e( 'Revolution Slider', 'pojo-importer' ); ?>
+						</label>
+					</div>
+				<?php endif; ?>
+				
 				<div>
 					<p><button type="submit" class="button"><?php _e( 'Import', 'pojo-importer' ); ?></button></p>
 				</div>
@@ -164,109 +184,165 @@ class Pojo_Importer_Settings {
 		
 		if ( isset( $_POST['content'] ) && 'yes' === $_POST['content'] ) {
 			// Content:
-			ob_start();
-
-			$import                    = new Pojo_Importer_Handler();
-			$import->fetch_attachments = true;
-			$import->import( $this->get_content_path( $_POST['lang'] ) );
-
-			$import_log .= ob_get_clean();
-
-			// Galleries Placeholders
-			$placeholder_ids = $import->generate_placeholders();
-			if ( ! empty( $placeholder_ids ) ) {
-				$meta_key      = 'gallery_gallery';
-				$galleries_ids = $wpdb->get_col(
-					$wpdb->prepare(
-						'SELECT `post_id` FROM `%1$s`
-							WHERE `meta_key` LIKE \'%2$s\'
-						;',
-						$wpdb->postmeta,
-						$meta_key
-					)
-				);
-
-				if ( ! empty( $galleries_ids ) ) {
-					foreach ( $galleries_ids as $gallery_id ) {
-						update_post_meta( $gallery_id, $meta_key, implode( ',', $placeholder_ids ) );
-					}
-				}
-			}
-
-			update_option( 'pojo_has_import_content_data_' . strtolower( Pojo_Core::instance()->licenses->updater->theme_name ), 'true' );
+			$import_log .= $this->import_content( $_POST['lang'] );
 		}
 		
 		if ( isset( $_POST['customizer'] ) && 'yes' === $_POST['customizer'] ) {
 			// Customizer:
-			$customizer_options = json_decode( file_get_contents( $this->get_customizer_content_path( $_POST['lang'] ) ), true );
-			
-			if ( ! empty( $customizer_options ) ) {
-				foreach ( $customizer_options as $key => $value ) {
-					set_theme_mod( $key, $value );
-				}
-			}
+			$this->import_customizer( $_POST['lang'] );
 		}
 		
 		if ( isset( $_POST['widgets'] ) && 'yes' === $_POST['widgets'] ) {
 			// Widgets:
-			$widgets = file_get_contents( $this->get_widgets_content_path( $_POST['lang'] ) );
-			$widgets = json_decode( $widgets, true );
-
-			if ( ! empty( $widgets ) ) {
-				foreach ( $widgets as $key => $value ) {
-					update_option( $key, $value );
-				}
-			}
+			$this->import_widgets( $_POST['lang'] );
 		}
 		
 		if ( isset( $_POST['menus'] ) && 'yes' === $_POST['menus'] ) {
 			// Menus:
-			$menus = array(
-				// location => slug
-				'primary' => 'main',
-				'primary_mobile' => 'main',
-			);
-
-			$nav_menu_locations = get_nav_menu_locations();
-
-			$nav_menus            = wp_get_nav_menus();
-			$registered_nav_menus = get_registered_nav_menus();
-			if ( ! empty( $registered_nav_menus ) ) {
-				foreach ( $registered_nav_menus as $location_key => $location_title ) {
-					if ( isset( $menus[ $location_key ] ) ) {
-						foreach ( $nav_menus as $nav_menu ) {
-							if ( $menus[ $location_key ] === $nav_menu->name ) {
-								$nav_menu_locations[ $location_key ] = $nav_menu->term_id;
-							}
-						}
-					}
-				}
-			}
-			set_theme_mod( 'nav_menu_locations', $nav_menu_locations );
+			$this->import_menus();
 		}
 
 		if ( isset( $_POST['front_page'] ) && 'yes' === $_POST['front_page'] ) {
 			// Set Home Page
-			$home_page_id = $wpdb->get_var(
-				$wpdb->prepare(
-					'SELECT `ID` FROM %1$s
-						WHERE `post_name` = \'%2$s\'
-							AND `post_type` = \'page\'
-					;',
-					$wpdb->posts,
-					'homepage'
-				)
-			);
+			$this->import_front_page();
+		}
 
-			if ( ! is_null( $home_page_id ) ) {
-				update_option( 'show_on_front', 'page' );
-				update_option( 'page_on_front', $home_page_id );
-			}
+		if ( isset( $_POST['revslider'] ) && 'yes' === $_POST['revslider'] ) {
+			// RevSlider
+			$this->import_revslider( $_POST['lang'] );
 		}
 		
 		echo $import_log;
 		
 		die();
+	}
+
+	public function import_content( $lang ) {
+		global $wpdb;
+		
+		ob_start();
+
+		$import                    = new Pojo_Importer_Handler();
+		$import->fetch_attachments = true;
+		$import->import( $this->get_content_path( $lang ) );
+
+		$import_log = ob_get_clean();
+
+		// Galleries Placeholders
+		$placeholder_ids = $import->generate_placeholders();
+		if ( ! empty( $placeholder_ids ) ) {
+			$meta_key      = 'gallery_gallery';
+			$galleries_ids = $wpdb->get_col(
+				$wpdb->prepare(
+					'SELECT `post_id` FROM `%1$s`
+							WHERE `meta_key` LIKE \'%2$s\'
+						;',
+					$wpdb->postmeta,
+					$meta_key
+				)
+			);
+
+			if ( ! empty( $galleries_ids ) ) {
+				foreach ( $galleries_ids as $gallery_id ) {
+					update_post_meta( $gallery_id, $meta_key, implode( ',', $placeholder_ids ) );
+				}
+			}
+		}
+
+		update_option( 'pojo_has_import_content_data_' . strtolower( Pojo_Core::instance()->licenses->updater->theme_name ), 'true' );
+		
+		return $import_log;
+	}
+
+	public function import_customizer( $lang ) {
+		$customizer_options = json_decode( file_get_contents( $this->get_customizer_content_path( $lang ) ), true );
+
+		if ( ! empty( $customizer_options ) ) {
+			foreach ( $customizer_options as $key => $value ) {
+				set_theme_mod( $key, $value );
+			}
+		}
+	}
+
+	public function import_widgets( $lang ) {
+		$widgets = file_get_contents( $this->get_widgets_content_path( $lang ) );
+		$widgets = json_decode( $widgets, true );
+
+		if ( ! empty( $widgets ) ) {
+			foreach ( $widgets as $key => $value ) {
+				update_option( $key, $value );
+			}
+		}
+	}
+
+	public function import_menus() {
+		$menus = array(
+			// location => slug
+			'primary' => 'main',
+			'primary_mobile' => 'main',
+		);
+
+		$nav_menu_locations = get_nav_menu_locations();
+
+		$nav_menus            = wp_get_nav_menus();
+		$registered_nav_menus = get_registered_nav_menus();
+		if ( ! empty( $registered_nav_menus ) ) {
+			foreach ( $registered_nav_menus as $location_key => $location_title ) {
+				if ( isset( $menus[ $location_key ] ) ) {
+					foreach ( $nav_menus as $nav_menu ) {
+						if ( $menus[ $location_key ] === $nav_menu->name ) {
+							$nav_menu_locations[ $location_key ] = $nav_menu->term_id;
+						}
+					}
+				}
+			}
+		}
+		set_theme_mod( 'nav_menu_locations', $nav_menu_locations );
+	}
+
+	public function import_front_page() {
+		global $wpdb;
+		
+		$home_page_id = $wpdb->get_var(
+			$wpdb->prepare(
+				'SELECT `ID` FROM %1$s
+						WHERE `post_name` = \'%2$s\'
+							AND `post_type` = \'page\'
+					;',
+				$wpdb->posts,
+				'homepage'
+			)
+		);
+
+		if ( ! is_null( $home_page_id ) ) {
+			update_option( 'show_on_front', 'page' );
+			update_option( 'page_on_front', $home_page_id );
+		}
+	}
+
+	public function import_revslider( $lang ) {
+		if ( ! Pojo_Compatibility::is_revslider_installer() )
+			return;
+
+		$files = $this->get_files_list();
+		if ( empty( $files ) )
+			return;
+
+		if ( ! isset( $files[ $lang ] ) || ! isset( $files[ $lang ]['revslider'] ) )
+			return;
+
+		$revslider = new RevSlider();
+		
+		foreach ( $files[ $lang ]['revslider'] as $slider ) {
+			$temp_file = tempnam( sys_get_temp_dir(), 'slider.zip' );
+			
+			$zip_content = file_get_contents( $slider );
+			file_put_contents( $temp_file, $zip_content );
+
+			$revslider->importSliderFromPost( 'true', 'true', $temp_file );
+			
+			unlink( $temp_file );
+		}
 	}
 
 	public function __construct() {
