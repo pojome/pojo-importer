@@ -30,6 +30,18 @@ class Pojo_Importer_Settings {
 		);
 	}
 
+	public function get_default_lang() {
+		$default_langs = array(
+			'en_US' => 'en',
+			'he_IL' => 'he',
+		);
+		
+		if ( isset( $default_langs[ get_locale() ] ) )
+			return $default_langs[ get_locale() ];
+		
+		return 'en';
+	}
+
 	public function get_files_list() {
 		$path = get_template_directory() . '/assets/demo/files.php';
 		if ( file_exists( $path ) )
@@ -84,7 +96,7 @@ class Pojo_Importer_Settings {
 						<?php _e( 'Choose your language', 'pojo-importer' ); ?>:
 						<select name="lang">
 							<?php foreach ( $this->get_content_langs() as $lang_key => $lang_title ) : ?>
-								<option value="<?php echo $lang_key; ?>"><?php echo $lang_title; ?></option>
+								<option value="<?php echo $lang_key; ?>"<?php selected( $this->get_default_lang(), $lang_key ); ?>><?php echo $lang_title; ?></option>
 							<?php endforeach; ?>
 						</select>
 					</label>
