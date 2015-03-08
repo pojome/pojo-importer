@@ -1,5 +1,5 @@
 /**
- * Pojo Builder Animation Makefile
+ * Pojo Importer Makefile
  */
 'use strict';
 
