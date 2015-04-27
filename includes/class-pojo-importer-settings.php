@@ -167,11 +167,22 @@ class Pojo_Importer_Settings {
 						.fadeOut( 'fast' )
 						.after( '<div class="pojo-loading"><span class="spinner"></span> <?php _e( 'Loading', 'pojo-importer' ); ?>..</div>' );
 					
-					$.post( ajaxurl, $thisForm.serialize(), function( msg ) {
+					/*$.post( ajaxurl, $thisForm.serialize(), function( msg ) {
 						$( 'div.pojo-loading' ).fadeOut( 'fast' );
 						//$thisForm.after( msg );
-						$thisForm.after( '<p><?php printf( __( 'All done. <a href="%s">Have fun!</a>', 'pojo-importer' ), home_url() ); ?></p>' );
-					} );
+						var $textarea = $( '<div></div>' );
+						$textarea
+							.html( msg )
+							.addClass( 'widget-top' )
+							.css( {
+								width: '80%',
+								'max-height': '350px',
+								'overflow-y': 'scroll'
+							} );
+						$thisForm
+							.after( $textarea )
+							.after( '<p><?php printf( __( 'All done. <a href="%s">Have fun!</a>', 'pojo-importer' ), home_url() ); ?></p>' );
+					} );*/
 					return false;
 				} );
 			} );
