@@ -167,7 +167,7 @@ class Pojo_Importer_Settings {
 						.fadeOut( 'fast' )
 						.after( '<div class="pojo-loading"><span class="spinner"></span> <?php _e( 'Loading', 'pojo-importer' ); ?>..</div>' );
 					
-					/*$.post( ajaxurl, $thisForm.serialize(), function( msg ) {
+					$.post( ajaxurl, $thisForm.serialize(), function( msg ) {
 						$( 'div.pojo-loading' ).fadeOut( 'fast' );
 						//$thisForm.after( msg );
 						var $textarea = $( '<div></div>' );
@@ -182,7 +182,7 @@ class Pojo_Importer_Settings {
 						$thisForm
 							.after( $textarea )
 							.after( '<p><?php printf( __( 'All done. <a href="%s">Have fun!</a>', 'pojo-importer' ), home_url() ); ?></p>' );
-					} );*/
+					} );
 					return false;
 				} );
 			} );
