@@ -176,6 +176,7 @@ class Pojo_Importer_Settings {
 							.addClass( 'widget-top' )
 							.css( {
 								width: '80%',
+								padding: '15px',
 								'max-height': '350px',
 								'overflow-y': 'scroll'
 							} );
