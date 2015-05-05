@@ -49,17 +49,36 @@ class Pojo_Importer_Settings {
 		
 		return array();
 	}
+	
+	protected function get_remote_content_file( $type, $lang ) {
+		if ( ! in_array( $type, array( 'content', 'customizer', 'widgets' ) ) )
+			return '';
+
+		$files = $this->get_files_list();
+		if ( empty( $files ) )
+			return '';
+
+		if ( ! isset( $files[ $lang ] ) || ! isset( $files[ $lang ][ $type ] ) )
+			return '';
+		
+		$url = $files[ $lang ][ $type ];
+		$temp_file = tempnam( sys_get_temp_dir(), pathinfo( $url, PATHINFO_BASENAME ) );
+		$zip_content = file_get_contents( $files[ $lang ][ $type ] );
+		file_put_contents( $temp_file, $zip_content );
+		
+		return $temp_file;
+	}
 
 	public function get_content_path( $lang ) {
-		return get_template_directory() . sprintf( '/assets/demo/content-%s.xml', $lang );
+		return $this->get_remote_content_file( 'content', $lang );
 	}
 
 	public function get_widgets_content_path( $lang ) {
-		return get_template_directory() . sprintf( '/assets/demo/widgets-%s.json', $lang );
+		return $this->get_remote_content_file( 'widgets', $lang );
 	}
 
 	public function get_customizer_content_path( $lang ) {
-		return get_template_directory() . sprintf( '/assets/demo/customizer-%s.json', $lang );
+		return $this->get_remote_content_file( 'customizer', $lang );
 	}
 	
 	public function register_menu() {
