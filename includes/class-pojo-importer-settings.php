@@ -43,11 +43,36 @@ class Pojo_Importer_Settings {
 	}
 
 	public function get_files_list() {
-		$path = get_template_directory() . '/assets/demo/files.php';
-		if ( file_exists( $path ) )
-			return require( $path );
+		static $return = null;
 		
-		return array();
+		if ( is_null( $return ) ) {
+			$response = wp_remote_post(
+				'http://pojo.me/',
+				array(
+					'sslverify' => false,
+					'timeout' => 30,
+					'body' => array(
+						'pojo_action' => 'get_import_files',
+						'theme' => Pojo_Core::instance()->licenses->updater->theme_name,
+						'license' => Pojo_Core::instance()->licenses->settings->get_license_key(),
+						'lang' => $_POST['lang'],
+					)
+				)
+			);
+
+			if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+				$return = array();
+				return $return;
+			}
+			
+			$response_data = json_decode( wp_remote_retrieve_body( $response ), true );
+			if ( $response_data['success'] )
+				$return = $response_data['data'];
+			else
+				$return = array();
+		}
+		
+		return $return;
 	}
 	
 	protected function get_remote_content_file( $type, $lang ) {
