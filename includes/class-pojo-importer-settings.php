@@ -6,6 +6,20 @@ class Pojo_Importer_Settings {
 	protected $_capability = 'manage_options';
 	
 	protected $_print_footer_scripts = false;
+	
+	protected $_saved_files = array();
+
+	public function remove_temp_files() {
+		if ( empty( $this->_saved_files ) )
+			return;
+		
+		foreach ( $this->_saved_files as $file ) {
+			if ( file_exists( $file['file'] ) )
+				@unlink( $file['file'] );
+		}
+		
+		$this->_saved_files = array();
+	}
 
 	public function setup_import() {
 		if ( defined( 'WP_LOAD_IMPORTERS' ) )
@@ -75,6 +89,21 @@ class Pojo_Importer_Settings {
 		return $return;
 	}
 	
+	protected function _upload_file( $url ) {
+		add_filter( 'upload_mimes', array( &$this, 'filter_add_extra_mime_types' ), 30, 2 );
+		$upload = wp_upload_bits(
+			pathinfo( $url, PATHINFO_BASENAME ),
+			null,
+			file_get_contents( $url )
+		);
+		remove_filter( 'upload_mimes', array( &$this, 'filter_add_extra_mime_types' ), 30 );
+
+		// Save the file to unlink after import action
+		$this->_saved_files[] = $upload;
+		
+		return $upload['file'];
+	}
+	
 	protected function get_remote_content_file( $type, $lang ) {
 		if ( ! in_array( $type, array( 'content', 'customizer', 'widgets' ) ) )
 			return '';
@@ -87,11 +116,15 @@ class Pojo_Importer_Settings {
 			return '';
 		
 		$url = $files[ $lang ][ $type ];
-		$temp_file = tempnam( sys_get_temp_dir(), pathinfo( $url, PATHINFO_BASENAME ) );
-		$zip_content = file_get_contents( $files[ $lang ][ $type ] );
-		file_put_contents( $temp_file, $zip_content );
+
+		return $this->_upload_file( $url );
+	}
+
+	public function filter_add_extra_mime_types( $mime_types, $user ) {
+		$mime_types['xml'] = 'application/xml';
+		$mime_types['json'] = 'application/json';
 		
-		return $temp_file;
+		return $mime_types;
 	}
 
 	public function get_content_path( $lang ) {
@@ -280,6 +313,9 @@ class Pojo_Importer_Settings {
 			$this->import_revslider( $_POST['lang'] );
 		}
 		
+		// Remove temp files
+		$this->remove_temp_files();
+		
 		echo $import_log;
 		
 		die();
@@ -402,14 +438,8 @@ class Pojo_Importer_Settings {
 		$revslider = new RevSlider();
 		
 		foreach ( $files[ $lang ]['revslider'] as $slider ) {
-			$temp_file = tempnam( sys_get_temp_dir(), 'slider.zip' );
-			
-			$zip_content = file_get_contents( $slider );
-			file_put_contents( $temp_file, $zip_content );
-
+			$temp_file = $this->_upload_file( $slider );
 			$revslider->importSliderFromPost( 'true', 'true', $temp_file );
-			
-			unlink( $temp_file );
 		}
 	}
 
