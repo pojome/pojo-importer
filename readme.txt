@@ -2,8 +2,8 @@
 Contributors: pojo.me, KingYes, ariel.k
 Tags: Import, Importer,
 Requires at least: 4.1
-Tested up to: 4.2
-Stable tag: 1.0.0
+Tested up to: 4.2.2
+Stable tag: 1.0.4
 License: GPLv2 or later
 
 Import posts, pages, widgets, menus, customizer, front page and more to your theme which works with Pojo Framework.
@@ -25,7 +25,7 @@ Import Language:
 
 Would you like to contribute to Pojo Importer? You are more than welcome to submit your requests on the [GitHub repo][3]. Also, if you have any notes about the code, please open a ticket on this issue tracker.
 
- [1]: http://pojo.me/?utm_source=wp-repo&utm_medium=link&utm_campaign=custom_fonts
+ [1]: http://pojo.me/?utm_source=wp-repo&utm_medium=link&utm_campaign=imported
  [2]: https://wordpress.org/plugins/woocommerce/
  [3]: https://github.com/pojome/pojo-importer
 
