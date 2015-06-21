@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: pojo-importer 1.0.4\n"
+"Project-Id-Version: pojo-importer 1.0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-10 16:57+0300\n"
+"POT-Creation-Date: 2015-06-21 18:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,82 +22,82 @@ msgstr ""
 msgid "Invalid file type"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:28
+#: includes/class-pojo-importer-settings.php:42
 msgid "English"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:29
+#: includes/class-pojo-importer-settings.php:43
 msgid "Hebrew"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:112
-#: includes/class-pojo-importer-settings.php:113
-#: includes/class-pojo-importer-settings.php:126
+#: includes/class-pojo-importer-settings.php:145
+#: includes/class-pojo-importer-settings.php:146
+#: includes/class-pojo-importer-settings.php:159
 msgid "Demo Import"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:128
+#: includes/class-pojo-importer-settings.php:161
 msgid ""
 "Using the demo import allows you to import all the demo content (Posts, "
 "Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and "
 "Front Page."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:130
+#: includes/class-pojo-importer-settings.php:163
 #, php-format
 msgid ""
 "If you want to import all of the <a href=\"%s\" target=\"_blank"
 "\">WooCommerce</a> content, you must install the plugin before importing."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:132
+#: includes/class-pojo-importer-settings.php:165
 msgid ""
 "Note: Due to copyright reasons, demo images will be replaced a placeholder "
 "image."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:140
+#: includes/class-pojo-importer-settings.php:173
 msgid "Choose your language"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:152
+#: includes/class-pojo-importer-settings.php:185
 msgid "The demo content (posts, pages, galleries, slideshows, WooCommerce)"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:159
+#: includes/class-pojo-importer-settings.php:192
 msgid "Widgets"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:166
+#: includes/class-pojo-importer-settings.php:199
 msgid "Menus"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:173
+#: includes/class-pojo-importer-settings.php:206
 msgid "Customizer"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:180
+#: includes/class-pojo-importer-settings.php:213
 msgid "Front Page"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:188
+#: includes/class-pojo-importer-settings.php:221
 msgid "Revolution Slider"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:194
+#: includes/class-pojo-importer-settings.php:227
 msgid "Import"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:212
+#: includes/class-pojo-importer-settings.php:245
 msgid "Loading"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:229
+#: includes/class-pojo-importer-settings.php:262
 #, php-format
 msgid "All done. <a href=\"%s\">Have fun!</a>"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:242
+#: includes/class-pojo-importer-settings.php:275
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
