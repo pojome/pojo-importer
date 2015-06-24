@@ -81,6 +81,103 @@ module.exports = function( grunt ) {
 				],
 				expand: true
 			}
+		},
+
+		wp_readme_to_markdown: {
+			github: {
+				options: {
+					gruntDependencyStatusUrl: 'https://david-dm.org/pojome/pojo-importer'
+				},
+				files: {
+					'README.md': 'readme.txt'
+				}
+			}
+		},
+
+		replace: {
+			plugin_main: {
+				src: [ 'pojo-importer.php' ],
+				overwrite: true,
+				replacements: [
+					{
+						from: /Version: \d{1,1}\.\d{1,2}\.\d{1,2}/g,
+						to: 'Version: <%= pkg.version %>'
+					}
+				]
+			},
+
+			readme: {
+				src: [ 'readme.txt' ],
+				overwrite: true,
+				replacements: [
+					{
+						from: /Stable tag: \d{1,1}\.\d{1,2}\.\d{1,2}/g,
+						to: 'Stable tag: <%= pkg.version %>'
+					}
+				]
+			}
+		},
+
+		shell: {
+			git_add_all : {
+				command: [
+					'git add --all',
+					'git commit -m "Bump to <%= pkg.version %>"'
+				].join( '&&' )
+			}
+		},
+
+		release: {
+			options: {
+				bump: false,
+				npm: false,
+				commit: false,
+				tagName: 'v<%= version %>',
+				commitMessage: 'released v<%= version %>',
+				tagMessage: 'Tagged as v<%= version %>'
+			}
+		},
+
+		copy: {
+			main: {
+				src: [
+					'**',
+					'!node_modules/**',
+					'!build/**',
+					'!bin/**',
+					'!.git/**',
+					'!tests/**',
+					'!.travis.yml',
+					'!.jshintrc',
+					'!README.md',
+					'!phpunit.xml',
+					'!vendor/**',
+					'!Gruntfile.js',
+					'!package.json',
+					'!.gitignore',
+					'!.gitmodules',
+					'!*~'
+				],
+				expand: true,
+				dest: 'build/'
+			}
+		},
+
+		clean: {
+			//Clean up build folder
+			main: [
+				'build'
+			]
+		},
+
+		wp_deploy: {
+			deploy:{
+				options: {
+					plugin_slug: '<%= pkg.slug %>',
+					svn_user: 'KingYes',
+					build_dir: 'build/'
+				}
+			}
 		}
 		
 	} );
@@ -88,6 +185,21 @@ module.exports = function( grunt ) {
 	// Default task(s).
 	grunt.registerTask( 'default', [
 		'checktextdomain',
-		'pot'
+		'pot',
+		'wp_readme_to_markdown'
+	] );
+
+	grunt.registerTask( 'build', [
+		'default',
+		'clean',
+		'copy'
+	] );
+
+	grunt.registerTask( 'publish', [
+		'default',
+		'bumpup',
+		'replace',
+		'shell:git_add_all',
+		'release'
 	] );
 };
