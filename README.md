@@ -5,7 +5,7 @@
 **Tags:** Import, Importer,  
 **Requires at least:** 4.1  
 **Tested up to:** 4.2.2  
-**Stable tag:** 1.1.0  
+**Stable tag:** 1.1.1  
 **License:** GPLv2 or later  
 
 Import posts, pages, widgets, menus, customizer, front page and more to your theme which works with Pojo Framework.
@@ -50,6 +50,9 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 1. Enjoy!
 
 ## Changelog ##
+
+### 1.1.2 ###
+* Fixed! - Added more mime type before upload files
 
 ### 1.1.1 ###
 * Fixed! - Bug upload limit in Multisite install
