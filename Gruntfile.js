@@ -94,6 +94,15 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		bumpup: {
+			options: {
+				updateProps: {
+					pkg: 'package.json'
+				}
+			},
+			file: 'package.json'
+		},
+
 		replace: {
 			plugin_main: {
 				src: [ 'pojo-importer.php' ],

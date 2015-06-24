@@ -5,7 +5,7 @@ Plugin URI: http://pojo.me/
 Description: Import all the demo content (Posts, Pages, Galleries, Slideshows), Widgets, Menus, Customizer and Front Page.
 Author: Pojo Team
 Author URI: http://pojo.me/
-Version: 1.1.0
+Version: 1.1.1
 Text Domain: pojo-importer
 Domain Path: /languages/
 
