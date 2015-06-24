@@ -49,5 +49,8 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 
 == Changelog ==
 
+= 1.1.1 =
+* Fixed! - Bug upload limit in Multisite install
+
 = 1.1.0 =
 * Initial Public Release!

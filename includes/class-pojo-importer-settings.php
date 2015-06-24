@@ -90,6 +90,13 @@ class Pojo_Importer_Settings {
 	}
 	
 	protected function _upload_file( $url ) {
+		$has_ms_filter = false;
+
+		if ( has_filter( 'wp_upload_bits', 'upload_is_file_too_big' ) ) {
+			remove_filter( 'wp_upload_bits', 'upload_is_file_too_big' );
+			$has_ms_filter = true;
+		}
+
 		add_filter( 'upload_mimes', array( &$this, 'filter_add_extra_mime_types' ), 30, 2 );
 		$upload = wp_upload_bits(
 			pathinfo( $url, PATHINFO_BASENAME ),
@@ -98,9 +105,13 @@ class Pojo_Importer_Settings {
 		);
 		remove_filter( 'upload_mimes', array( &$this, 'filter_add_extra_mime_types' ), 30 );
 
+		if ( $has_ms_filter ) {
+			add_filter( 'wp_upload_bits', 'upload_is_file_too_big' );
+		}
+
 		// Save the file to unlink after import action
 		$this->_saved_files[] = $upload;
-		
+
 		return $upload['file'];
 	}
 	
