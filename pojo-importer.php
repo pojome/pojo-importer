@@ -74,7 +74,7 @@ final class Pojo_Importer {
 		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'pojo-importer' ), '1.0.0' );
 	}
 
-	/**cd
+	/**
 	 * @return Pojo_Importer
 	 */
 	public static function instance() {
