@@ -5,7 +5,7 @@
 **Tags:** Import, Importer,  
 **Requires at least:** 4.1  
 **Tested up to:** 4.2.2  
-**Stable tag:** 1.1.2  
+**Stable tag:** 1.1.3  
 **License:** GPLv2 or later  
 
 Import posts, pages, widgets, menus, customizer, front page and more to your theme which works with Pojo Framework.
