@@ -134,6 +134,7 @@ class Pojo_Importer_Settings {
 	public function filter_add_extra_mime_types( $mime_types, $user ) {
 		$mime_types['xml'] = 'application/xml';
 		$mime_types['json'] = 'application/json';
+		$mime_types['zip'] = 'application/zip';
 		
 		return $mime_types;
 	}
