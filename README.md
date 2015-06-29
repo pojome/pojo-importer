@@ -51,6 +51,9 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 
 ## Changelog ##
 
+### 1.1.3 ###
+* Tweak! - added mime type for RevSlider
+
 ### 1.1.2 ###
 * Fixed! - Added more mime type before upload files
 

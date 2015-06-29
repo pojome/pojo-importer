@@ -3,7 +3,7 @@ Contributors: pojo.me, KingYes, ariel.k
 Tags: Import, Importer,
 Requires at least: 4.1
 Tested up to: 4.2.2
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 
 Import posts, pages, widgets, menus, customizer, front page and more to your theme which works with Pojo Framework.
@@ -48,6 +48,9 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 1. Enjoy!
 
 == Changelog ==
+
+= 1.1.3 =
+* Tweak! - added mime type for RevSlider
 
 = 1.1.2 =
 * Fixed! - Added more mime type before upload files
