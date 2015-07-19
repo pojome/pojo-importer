@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-import 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 16:02+0200\n"
-"PO-Revision-Date: 2015-01-19 20:03+0200\n"
+"POT-Creation-Date: 2015-07-19 18:53+0300\n"
+"PO-Revision-Date: 2015-07-19 18:55+0300\n"
 "Last-Translator: Yakir Sitbon <yakir@pojo.me>\n"
 "Language-Team: he_IL <LL@li.org>\n"
 "Language: he_IL\n"
@@ -21,29 +21,29 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.8.2\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: includes/class-pojo-import-handler.php:95
+#: includes/class-pojo-importer-handler.php:95
 #: includes/wordpress-importer/wordpress-importer.php:866
 msgid "Invalid file type"
 msgstr "סוג קובץ לא חוקי"
 
-#: includes/class-pojo-import-settings.php:25
+#: includes/class-pojo-importer-settings.php:42
 msgid "English"
 msgstr "אנגלית"
 
-#: includes/class-pojo-import-settings.php:26
+#: includes/class-pojo-importer-settings.php:43
 msgid "Hebrew"
 msgstr "עברית"
 
-#: includes/class-pojo-import-settings.php:45
-#: includes/class-pojo-import-settings.php:46
-#: includes/class-pojo-import-settings.php:59
+#: includes/class-pojo-importer-settings.php:157
+#: includes/class-pojo-importer-settings.php:158
+#: includes/class-pojo-importer-settings.php:171
 msgid "Demo Import"
 msgstr "יבוא דמו"
 
-#: includes/class-pojo-import-settings.php:61
+#: includes/class-pojo-importer-settings.php:173
 msgid ""
 "Using the demo import allows you to import all the demo content (Posts, "
 "Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and "
@@ -52,7 +52,7 @@ msgstr ""
 "באמצעות ייבוא דמו ניתן ליבא את כל תוכן האתר (פוסטים, עמודים, גלריות, מצגות, "
 "WooCommerce), וידג'טים, תפריטים והגדרת דף הבית."
 
-#: includes/class-pojo-import-settings.php:63
+#: includes/class-pojo-importer-settings.php:175
 #, php-format
 msgid ""
 "If you want to import all of the <a href=\"%s\" target=\"_blank"
@@ -61,7 +61,7 @@ msgstr ""
 "באם אתם רוצים לייבא את התוכן של <a href=\"%s\" target=\"_blank"
 "\">WooCommerce</a> יש להתקין את התוסף לפני הייבוא."
 
-#: includes/class-pojo-import-settings.php:65
+#: includes/class-pojo-importer-settings.php:177
 msgid ""
 "Note: Due to copyright reasons, demo images will be replaced a placeholder "
 "image."
@@ -69,44 +69,56 @@ msgstr ""
 "שימו לב: מפאת הגנה על זכויות יוצרים, כל התמונות המופיעות בדמו, יוחלפו בתהליך "
 "זה בתמונה חלופית (Placeholder)."
 
-#: includes/class-pojo-import-settings.php:73
+#: includes/class-pojo-importer-settings.php:185
 msgid "Choose your language"
 msgstr "בחר את השפה שלך"
 
-#: includes/class-pojo-import-settings.php:85
+#: includes/class-pojo-importer-settings.php:197
 msgid "The demo content (posts, pages, galleries, slideshows, WooCommerce)"
 msgstr "תוכן הדמו (פוסטים, עמודים, גלריות, מצגות, WooCommerce)"
 
-#: includes/class-pojo-import-settings.php:92
+#: includes/class-pojo-importer-settings.php:204
 msgid "Widgets"
 msgstr "וידגטים"
 
-#: includes/class-pojo-import-settings.php:99
+#: includes/class-pojo-importer-settings.php:211
 msgid "Menus"
 msgstr "תפריטים"
 
-#: includes/class-pojo-import-settings.php:106
+#: includes/class-pojo-importer-settings.php:218
 msgid "Customizer"
 msgstr "התאמה אישית"
 
-#: includes/class-pojo-import-settings.php:113
+#: includes/class-pojo-importer-settings.php:225
 msgid "Front Page"
 msgstr "דף הבית"
 
-#: includes/class-pojo-import-settings.php:118
+#: includes/class-pojo-importer-settings.php:233
+msgid "Revolution Slider"
+msgstr ""
+
+#: includes/class-pojo-importer-settings.php:239
+msgid ""
+"Please Note: If there is content in the existing site, you may not want to "
+"import the demo content, it could change the content structure."
+msgstr ""
+"שימו לב: במידה ויש כבר תוכן באתר הקיים, ייתכן ולא תרצו לעשות ייבוא לתוכן "
+"הדמו, פעולה זו עלולה לשנות את מבנה התוכן."
+
+#: includes/class-pojo-importer-settings.php:240
 msgid "Import"
 msgstr "ייבוא"
 
-#: includes/class-pojo-import-settings.php:136
+#: includes/class-pojo-importer-settings.php:258
 msgid "Loading"
 msgstr "טעינה"
 
-#: includes/class-pojo-import-settings.php:141
+#: includes/class-pojo-importer-settings.php:275
 #, php-format
 msgid "All done. <a href=\"%s\">Have fun!</a>"
 msgstr "הכל בוצע. <a href=\"%s\">תהנה!</a>"
 
-#: includes/class-pojo-import-settings.php:154
+#: includes/class-pojo-importer-settings.php:288
 msgid "You do not have sufficient permissions to access this page."
 msgstr "אין לך הרשאות מספיקות כדי לגשת לדף זה."
 
@@ -326,6 +338,6 @@ msgstr ""
 msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
 msgstr ""
 
-#: pojo-import.php:44 pojo-import.php:55
+#: pojo-importer.php:63 pojo-importer.php:74
 msgid "Cheatin&#8217; huh?"
 msgstr ""

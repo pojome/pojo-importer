@@ -173,8 +173,8 @@ class Pojo_Importer_Settings {
 			<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and Front Page.', 'pojo-importer' ); ?></p>
 			
 			<p><?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-importer' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
-			
-			<p style="color: #ff0000;"><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
+
+			<p><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
 			
 			<form id="pojo-importer-content">
 				<input type="hidden" name="action" value="pojo_do_import" />
@@ -236,6 +236,7 @@ class Pojo_Importer_Settings {
 				<?php endif; ?>
 				
 				<div>
+					<p style="color: #ff0000;"><?php _e( 'Please Note: If there is content in the existing site, you may not want to import the demo content, it could change the content structure.', 'pojo-importer' ); ?></p>
 					<p><button type="submit" class="button"><?php _e( 'Import', 'pojo-importer' ); ?></button></p>
 				</div>
 			</form>

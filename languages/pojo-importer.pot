@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-importer 1.1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-29 14:22+0300\n"
+"POT-Creation-Date: 2015-07-19 19:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,19 +85,25 @@ msgid "Revolution Slider"
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:239
+msgid ""
+"Please Note: If there is content in the existing site, you may not want to "
+"import the demo content, it could change the content structure."
+msgstr ""
+
+#: includes/class-pojo-importer-settings.php:240
 msgid "Import"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:257
+#: includes/class-pojo-importer-settings.php:258
 msgid "Loading"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:274
+#: includes/class-pojo-importer-settings.php:275
 #, php-format
 msgid "All done. <a href=\"%s\">Have fun!</a>"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:287
+#: includes/class-pojo-importer-settings.php:288
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
