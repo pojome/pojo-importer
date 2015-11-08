@@ -9,6 +9,83 @@ class Pojo_Importer_Settings {
 	
 	protected $_saved_files = array();
 
+	public function get_setting_local_url( $message_id = '' ) {
+		$url = add_query_arg(
+			array(
+				'page' => 'pojo-importer',
+				'tab' => 'local',
+			),
+			admin_url( 'admin.php' )
+		);
+		
+		if ( ! empty( $message_id ) )
+			$url = add_query_arg( 'message_id', $message_id, $url );
+		
+		return $url;
+	}
+
+	public function manager_actions() {
+		if ( empty( $_POST['pojo-imported-action'] ) )
+			return;
+		
+		switch ( $_POST['pojo-imported-action'] ) {
+			case 'content' :
+				check_admin_referer( 'pojo-imported-nonce-content' );
+
+				$import_file = $_FILES['import_file']['tmp_name'];
+
+				if ( empty( $import_file ) )
+					wp_die( __( 'Please upload a file to import', 'pojo' ) );
+
+				$this->handle_import_content( $import_file );
+				$this->import_menus();
+				$this->import_front_page();
+				
+				wp_redirect( $this->get_setting_local_url( 'content_imported' ) );
+				die;
+				
+			case 'customizer' :
+				check_admin_referer( 'pojo-imported-nonce-customizer' );
+				
+				$import_file = $_FILES['import_file']['tmp_name'];
+
+				if ( empty( $import_file ) )
+					wp_die( __( 'Please upload a file to import', 'pojo' ) );
+				
+				$this->handle_import_customizer( $import_file );
+				wp_redirect( $this->get_setting_local_url( 'customizer_imported' ) );
+				die;
+				
+			case 'widgets' :
+				check_admin_referer( 'pojo-imported-nonce-widgets' );
+
+				$import_file = $_FILES['import_file']['tmp_name'];
+
+				if ( empty( $import_file ) )
+					wp_die( __( 'Please upload a file to import', 'pojo' ) );
+
+				$this->handle_import_widgets( $import_file );
+				wp_redirect( $this->get_setting_local_url( 'widgets_imported' ) );
+				die;
+		}
+	}
+
+	public function admin_notices() {
+		switch ( filter_input( INPUT_GET, 'message_id' ) ) {
+			case 'content_imported' :
+				printf( '<div class="updated"><p>%s</p></div>', __( 'Content successfully.', 'pojo' ) );
+				break;
+			
+			case 'customizer_imported' :
+				printf( '<div class="updated"><p>%s</p></div>', __( 'Customizer successfully.', 'pojo' ) );
+				break;
+			
+			case 'widgets_imported' :
+				printf( '<div class="updated"><p>%s</p></div>', __( 'Widgets successfully.', 'pojo' ) );
+				break;
+		}
+	}
+
 	public function remove_temp_files() {
 		if ( empty( $this->_saved_files ) )
 			return;
@@ -163,86 +240,158 @@ class Pojo_Importer_Settings {
 	}
 
 	public function display_page() {
-		$this->_print_footer_scripts = true;
 		?>
 		<div class="wrap">
-
-			<div id="icon-themes" class="icon32"></div>
-			<h2><?php _e( 'Demo Import', 'pojo-importer' ); ?></h2>
-
-			<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and Front Page.', 'pojo-importer' ); ?></p>
-			
-			<p><?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-importer' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
-
-			<p><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
-			
-			<form id="pojo-importer-content">
-				<input type="hidden" name="action" value="pojo_do_import" />
-				<input type="hidden" name="_nonce" value="<?php echo wp_create_nonce( 'pojo-importer-content' ) ?>" />
-				
-				<div>
-					<label>
-						<?php _e( 'Choose your language', 'pojo-importer' ); ?>:
-						<select name="lang">
-							<?php foreach ( $this->get_content_langs() as $lang_key => $lang_title ) : ?>
-								<option value="<?php echo $lang_key; ?>"<?php selected( $this->get_default_lang(), $lang_key ); ?>><?php echo $lang_title; ?></option>
-							<?php endforeach; ?>
-						</select>
-					</label>
-				</div>
-				
-				<div>
-					<label>
-						<input type="checkbox" name="content" value="yes" checked />
-						<?php _e( 'The demo content (posts, pages, galleries, slideshows, WooCommerce)', 'pojo-importer' ); ?>
-					</label>
-				</div>
-				
-				<div>
-					<label>
-						<input type="checkbox" name="widgets" value="yes" checked />
-						<?php _e( 'Widgets', 'pojo-importer' ); ?>
-					</label>
-				</div>
-				
-				<div>
-					<label>
-						<input type="checkbox" name="menus" value="yes" checked />
-						<?php _e( 'Menus', 'pojo-importer' ); ?>
-					</label>
-				</div>
-				
-				<div>
-					<label>
-						<input type="checkbox" name="customizer" value="yes" checked />
-						<?php _e( 'Customizer', 'pojo-importer' ); ?>
-					</label>
-				</div>
-				
-				<div>
-					<label>
-						<input type="checkbox" name="front_page" value="yes" checked />
-						<?php _e( 'Front Page', 'pojo-importer' ); ?>
-					</label>
-				</div>
-				
-				<?php if ( Pojo_Compatibility::is_revslider_installer() ) : ?>
-					<div>
-						<label>
-							<input type="checkbox" name="revslider" value="yes" checked />
-							<?php _e( 'Revolution Slider', 'pojo-importer' ); ?>
-						</label>
-					</div>
-				<?php endif; ?>
-				
-				<div>
-					<p style="color: #ff0000;"><?php _e( 'Please Note: If there is content in the existing site, you may not want to import the demo content, it could change the content structure.', 'pojo-importer' ); ?></p>
-					<p><button type="submit" class="button"><?php _e( 'Import', 'pojo-importer' ); ?></button></p>
-				</div>
-			</form>
-			
+			<?php
+			if ( isset( $_GET['tab'] ) && 'local' === $_GET['tab'] )
+				$this->_print_setting_page_local();
+			else
+				$this->_print_setting_page_main();
+			?>
 		</div>
 	<?php
+	}
+	
+	protected function _print_setting_page_main() {
+		$this->_print_footer_scripts = true;
+		?>
+		<h2><?php _e( 'Demo Import', 'pojo-importer' ); ?></h2>
+
+		<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and Front Page.', 'pojo-importer' ); ?></p>
+
+		<p><?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-importer' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
+
+		<p><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
+
+		<form id="pojo-importer-content">
+			<input type="hidden" name="action" value="pojo_do_import" />
+			<input type="hidden" name="_nonce" value="<?php echo wp_create_nonce( 'pojo-importer-content' ) ?>" />
+
+			<div>
+				<label>
+					<?php _e( 'Choose your language', 'pojo-importer' ); ?>:
+					<select name="lang">
+						<?php foreach ( $this->get_content_langs() as $lang_key => $lang_title ) : ?>
+							<option value="<?php echo $lang_key; ?>"<?php selected( $this->get_default_lang(), $lang_key ); ?>><?php echo $lang_title; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</label>
+			</div>
+
+			<div>
+				<label>
+					<input type="checkbox" name="content" value="yes" checked />
+					<?php _e( 'The demo content (posts, pages, galleries, slideshows, WooCommerce)', 'pojo-importer' ); ?>
+				</label>
+			</div>
+
+			<div>
+				<label>
+					<input type="checkbox" name="widgets" value="yes" checked />
+					<?php _e( 'Widgets', 'pojo-importer' ); ?>
+				</label>
+			</div>
+
+			<div>
+				<label>
+					<input type="checkbox" name="menus" value="yes" checked />
+					<?php _e( 'Menus', 'pojo-importer' ); ?>
+				</label>
+			</div>
+
+			<div>
+				<label>
+					<input type="checkbox" name="customizer" value="yes" checked />
+					<?php _e( 'Customizer', 'pojo-importer' ); ?>
+				</label>
+			</div>
+
+			<div>
+				<label>
+					<input type="checkbox" name="front_page" value="yes" checked />
+					<?php _e( 'Front Page', 'pojo-importer' ); ?>
+				</label>
+			</div>
+
+			<?php if ( Pojo_Compatibility::is_revslider_installer() ) : ?>
+				<div>
+					<label>
+						<input type="checkbox" name="revslider" value="yes" checked />
+						<?php _e( 'Revolution Slider', 'pojo-importer' ); ?>
+					</label>
+				</div>
+			<?php endif; ?>
+
+			<div>
+				<p style="color: #ff0000;"><?php _e( 'Please Note: If there is content in the existing site, you may not want to import the demo content, it could change the content structure.', 'pojo-importer' ); ?></p>
+				<p><button type="submit" class="button"><?php _e( 'Import', 'pojo-importer' ); ?></button></p>
+			</div>
+			
+			
+			<div>
+				<a href="<?php echo esc_attr( $this->get_setting_local_url() ); ?>">Local Method</a>
+			</div>
+		</form>
+		<?php
+	}
+	
+	protected function _print_setting_page_local() {
+		?>
+		<h2><?php _e( 'Demo Import (Local)', 'pojo-importer' ); ?></h2>
+
+		<form method="post" enctype="multipart/form-data">
+			<h3><?php _e( 'Content', 'pojo-importer' ); ?></h3>
+			
+			<?php wp_nonce_field( 'pojo-imported-nonce-content' ); ?>
+			<input type="hidden" name="pojo-imported-action" value="content" />
+			<p>
+				<label>
+					<?php _e( 'Choose a file from your computer:', 'pojo' ); ?>
+					<input type="file" class="pojo-import-file" name="import_file" />
+				</label>
+			</p>
+			<p class="submit">
+				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Upload Import File', 'pojo' ); ?>" />
+			</p>
+		</form>
+
+		<hr />
+
+		<form method="post" enctype="multipart/form-data">
+			<h3><?php _e( 'Customizer', 'pojo-importer' ); ?></h3>
+			
+			<?php wp_nonce_field( 'pojo-imported-nonce-customizer' ); ?>
+			<input type="hidden" name="pojo-imported-action" value="customizer" />
+			<p>
+				<label>
+					<?php _e( 'Choose a file from your computer:', 'pojo' ); ?>
+					<input type="file" class="pojo-import-file" name="import_file" />
+				</label>
+			</p>
+			<p class="submit">
+				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Upload Import File', 'pojo' ); ?>" />
+			</p>
+		</form>
+
+		<hr />
+		
+		<form method="post" enctype="multipart/form-data">
+			<h3><?php _e( 'Widgets', 'pojo-importer' ); ?></h3>
+
+			<?php wp_nonce_field( 'pojo-imported-nonce-widgets' ); ?>
+			<input type="hidden" name="pojo-imported-action" value="widgets" />
+			<p>
+				<label>
+					<?php _e( 'Choose a file from your computer:', 'pojo' ); ?>
+					<input type="file" class="pojo-import-file" name="import_file" />
+				</label>
+			</p>
+			<p class="submit">
+				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Upload Import File', 'pojo' ); ?>" />
+			</p>
+		</form>
+		
+		<?php
 	}
 
 	public function admin_footer() {
@@ -335,61 +484,15 @@ class Pojo_Importer_Settings {
 	}
 
 	public function import_content( $lang ) {
-		global $wpdb;
-		
-		ob_start();
-
-		$import                    = new Pojo_Importer_Handler();
-		$import->fetch_attachments = true;
-		$import->import( $this->get_content_path( $lang ) );
-
-		$import_log = ob_get_clean();
-
-		// Galleries Placeholders
-		$placeholder_ids = $import->generate_placeholders();
-		if ( ! empty( $placeholder_ids ) ) {
-			$meta_key      = 'gallery_gallery';
-			$galleries_ids = $wpdb->get_col(
-				$wpdb->prepare(
-					'SELECT `post_id` FROM `%1$s`
-							WHERE `meta_key` LIKE \'%2$s\'
-						;',
-					$wpdb->postmeta,
-					$meta_key
-				)
-			);
-
-			if ( ! empty( $galleries_ids ) ) {
-				foreach ( $galleries_ids as $gallery_id ) {
-					update_post_meta( $gallery_id, $meta_key, implode( ',', $placeholder_ids ) );
-				}
-			}
-		}
-
-		update_option( 'pojo_has_import_content_data_' . strtolower( Pojo_Core::instance()->licenses->updater->theme_name ), 'true' );
-		
-		return $import_log;
+		return $this->handle_import_content( $this->get_content_path( $lang ) );
 	}
 
 	public function import_customizer( $lang ) {
-		$customizer_options = json_decode( file_get_contents( $this->get_customizer_content_path( $lang ) ), true );
-
-		if ( ! empty( $customizer_options ) ) {
-			foreach ( $customizer_options as $key => $value ) {
-				set_theme_mod( $key, $value );
-			}
-		}
+		$this->handle_import_customizer( $this->get_customizer_content_path( $lang ) );
 	}
 
 	public function import_widgets( $lang ) {
-		$widgets = file_get_contents( $this->get_widgets_content_path( $lang ) );
-		$widgets = json_decode( $widgets, true );
-
-		if ( ! empty( $widgets ) ) {
-			foreach ( $widgets as $key => $value ) {
-				update_option( $key, $value );
-			}
-		}
+		$this->handle_import_widgets( $this->get_widgets_content_path( $lang ) );
 	}
 
 	public function import_menus() {
@@ -423,9 +526,9 @@ class Pojo_Importer_Settings {
 		$home_page_id = $wpdb->get_var(
 			$wpdb->prepare(
 				'SELECT `ID` FROM %1$s
-						WHERE `post_name` = \'%2$s\'
-							AND `post_type` = \'page\'
-					;',
+					WHERE `post_name` = \'%2$s\'
+						AND `post_type` = \'page\'
+				;',
 				$wpdb->posts,
 				'homepage'
 			)
@@ -456,12 +559,74 @@ class Pojo_Importer_Settings {
 		}
 	}
 
+	public function handle_import_content( $path ) {
+		global $wpdb;
+
+		ob_start();
+
+		$import = new Pojo_Importer_Handler();
+		
+		$import->fetch_attachments = true;
+		$import->import( $path );
+
+		$import_log = ob_get_clean();
+
+		// Galleries Placeholders
+		$placeholder_ids = $import->generate_placeholders();
+		if ( ! empty( $placeholder_ids ) ) {
+			$meta_key      = 'gallery_gallery';
+			$galleries_ids = $wpdb->get_col(
+				$wpdb->prepare(
+					'SELECT `post_id` FROM `%1$s`
+							WHERE `meta_key` LIKE \'%2$s\'
+						;',
+					$wpdb->postmeta,
+					$meta_key
+				)
+			);
+
+			if ( ! empty( $galleries_ids ) ) {
+				foreach ( $galleries_ids as $gallery_id ) {
+					update_post_meta( $gallery_id, $meta_key, implode( ',', $placeholder_ids ) );
+				}
+			}
+		}
+
+		update_option( 'pojo_has_import_content_data_' . strtolower( Pojo_Core::instance()->licenses->updater->theme_name ), 'true' );
+
+		return $import_log;
+	}
+
+	public function handle_import_customizer( $path ) {
+		$customizer_options = json_decode( file_get_contents( $path ), true );
+
+		if ( ! empty( $customizer_options ) ) {
+			foreach ( $customizer_options as $key => $value ) {
+				set_theme_mod( $key, $value );
+			}
+		}
+	}
+
+	public function handle_import_widgets( $path ) {
+		$widgets = file_get_contents( $path );
+		$widgets = json_decode( $widgets, true );
+
+		if ( ! empty( $widgets ) ) {
+			foreach ( $widgets as $key => $value ) {
+				update_option( $key, $value );
+			}
+		}
+	}
+
 	public function __construct() {
 		if ( ! current_user_can( $this->_capability ) )
 			return;
-		
+
+		add_action( 'admin_init', array( &$this, 'manager_actions' ), 450 );
 		add_action( 'admin_menu', array( &$this, 'register_menu' ), 450 );
 		add_action( 'admin_footer', array( &$this, 'admin_footer' ) );
+
+		add_action( 'admin_notices', array( &$this, 'admin_notices' ) );
 
 		add_action( 'wp_ajax_pojo_do_import', array( &$this, 'ajax_pojo_do_import' ) );
 	}
