@@ -281,7 +281,7 @@ class Pojo_Importer_Settings {
 			<div>
 				<label>
 					<input type="checkbox" name="content" value="yes" checked />
-					<?php _e( 'The demo content (posts, pages, galleries, slideshows, WooCommerce)', 'pojo-importer' ); ?>
+					<?php _e( 'The demo content (Posts, Pages, Galleries, Slideshows, WooCommerce)', 'pojo-importer' ); ?>
 				</label>
 			</div>
 
@@ -346,7 +346,11 @@ class Pojo_Importer_Settings {
 		<p><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
 
 		<form method="post" enctype="multipart/form-data">
-			<h3><?php _e( 'Content', 'pojo-importer' ); ?></h3>
+			<h3><?php _e( 'Import Content', 'pojo-importer' ); ?></h3>
+
+			<p><?php _e( 'The demo content: Posts, Pages, Galleries, Slideshows, WooCommerce, Front Page & Menus', 'pojo-importer' ); ?></p>
+
+			<p><?php _e( 'Upload content file and we\'ll import the content into this site. Choose a content-en.xml file to upload, then click Import Content.', 'pojo-importer' ); ?></p>
 			
 			<?php wp_nonce_field( 'pojo-imported-nonce-content' ); ?>
 			<input type="hidden" name="pojo-imported-action" value="content" />
@@ -357,15 +361,18 @@ class Pojo_Importer_Settings {
 				</label>
 			</p>
 			<p class="submit">
-				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Upload Import File', 'pojo' ); ?>" />
+				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Content', 'pojo' ); ?>" />
 			</p>
 		</form>
 
 		<hr />
 
 		<form method="post" enctype="multipart/form-data">
-			<h3><?php _e( 'Customizer', 'pojo-importer' ); ?></h3>
-			
+			<h3><?php _e( 'Import Customizer', 'pojo-importer' ); ?></h3>
+
+			<p><?php _e( 'Upload your Customizer Settings file and we\'ll import the options into this site. Choose a customizer-en.json file to upload, then click Import Customizer.', 'pojo-importer' ); ?></p>
+
+
 			<?php wp_nonce_field( 'pojo-imported-nonce-customizer' ); ?>
 			<input type="hidden" name="pojo-imported-action" value="customizer" />
 			<p>
@@ -375,15 +382,16 @@ class Pojo_Importer_Settings {
 				</label>
 			</p>
 			<p class="submit">
-				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Upload Import File', 'pojo' ); ?>" />
+				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Customizer', 'pojo' ); ?>" />
 			</p>
 		</form>
 
 		<hr />
 		
 		<form method="post" enctype="multipart/form-data">
-			<h3><?php _e( 'Widgets', 'pojo-importer' ); ?></h3>
+			<h3><?php _e( 'Import Widgets', 'pojo-importer' ); ?></h3>
 
+			<p><?php _e( 'Upload content file and we\'ll import the content into this site. Choose a widgets-en.json file to upload, then click Import Widgets.', 'pojo-importer' ); ?></p>
 			<?php wp_nonce_field( 'pojo-imported-nonce-widgets' ); ?>
 			<input type="hidden" name="pojo-imported-action" value="widgets" />
 			<p>
@@ -393,7 +401,7 @@ class Pojo_Importer_Settings {
 				</label>
 			</p>
 			<p class="submit">
-				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Upload Import File', 'pojo' ); ?>" />
+				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Widgets', 'pojo' ); ?>" />
 			</p>
 		</form>
 		
