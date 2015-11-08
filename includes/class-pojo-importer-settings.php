@@ -337,7 +337,13 @@ class Pojo_Importer_Settings {
 	
 	protected function _print_setting_page_local() {
 		?>
-		<h2><?php _e( 'Demo Import (Local)', 'pojo-importer' ); ?></h2>
+		<h2><?php _e( 'Demo Import (Manual Installation)', 'pojo-importer' ); ?> <small><a href="#"><?php _e( 'Back to Auto Installation', 'pojo-importer' ); ?></a></small></h2>
+
+		<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and Front Page.', 'pojo-importer' ); ?></p>
+
+		<p><?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-importer' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
+
+		<p><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
 
 		<form method="post" enctype="multipart/form-data">
 			<h3><?php _e( 'Content', 'pojo-importer' ); ?></h3>
