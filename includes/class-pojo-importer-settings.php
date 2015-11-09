@@ -335,6 +335,8 @@ class Pojo_Importer_Settings {
 			
 			
 			<div>
+				<p>Problem with a auto demo import? Please go to the Demo Import - Manual Installation and import files from your computer</p>
+
 				<a href="<?php echo esc_attr( $this->get_setting_local_url() ); ?>">Local Method</a>
 			</div>
 		</form>
@@ -346,7 +348,11 @@ class Pojo_Importer_Settings {
 		?>
 		<h2><?php _e( 'Demo Import (Manual Installation)', 'pojo-importer' ); ?> <small><a href="<?php echo esc_attr( add_query_arg( array( 'page' => 'pojo-importer' ), admin_url( 'admin.php' ) ) ); ?>"><?php _e( 'Back to Auto Installation', 'pojo-importer' ); ?></a></small></h2>
 
-		<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce, Menus and Front Page), Customizer and Widgets.', 'pojo-importer' ); ?></p>
+		<div class="updated" style="border: none;">
+			<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce, Menus and Front Page), Customizer and Widgets.', 'pojo-importer' ); ?></p>
+
+			<p><?php _e( 'Need Help? Please go to Demo Import Guide to learn more.', 'pojo-importer' ); ?></p>
+		</div>
 
 		<hr />
 
