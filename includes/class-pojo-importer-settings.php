@@ -342,7 +342,7 @@ class Pojo_Importer_Settings {
 	
 	protected function _print_setting_page_local() {
 		?>
-		<h2><?php _e( 'Demo Import (Manual Installation)', 'pojo-importer' ); ?> <small><a href="#"><?php _e( 'Back to Auto Installation', 'pojo-importer' ); ?></a></small></h2>
+		<h2><?php _e( 'Demo Import (Manual Installation)', 'pojo-importer' ); ?> <small><a href="<?php echo esc_attr( add_query_arg( array( 'page' => 'pojo-importer' ), admin_url( 'admin.php' ) ) ); ?>"><?php _e( 'Back to Auto Installation', 'pojo-importer' ); ?></a></small></h2>
 
 		<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce, Menus and Front Page), Customizer and Widgets.', 'pojo-importer' ); ?></p>
 
