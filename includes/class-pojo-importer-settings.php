@@ -334,7 +334,7 @@ class Pojo_Importer_Settings {
 			</div>
 			
 			
-			<div>
+			<div style="background-color: #fff;padding: 1px 12px;box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);">
 				<p>Problem with a auto demo import? Please go to the Demo Import - Manual Installation and import files from your computer</p>
 
 				<a href="<?php echo esc_attr( $this->get_setting_local_url() ); ?>">Local Method</a>
