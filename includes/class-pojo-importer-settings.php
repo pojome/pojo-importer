@@ -38,7 +38,7 @@ class Pojo_Importer_Settings {
 				$import_file = $_FILES['import_file']['tmp_name'];
 
 				if ( empty( $import_file ) )
-					wp_die( __( 'Please upload a file to import', 'pojo' ) );
+					wp_die( __( 'Please upload a file to import', 'pojo-importer' ) );
 
 				$this->handle_import_content( $import_file );
 				$this->import_menus();
@@ -53,7 +53,7 @@ class Pojo_Importer_Settings {
 				$import_file = $_FILES['import_file']['tmp_name'];
 
 				if ( empty( $import_file ) )
-					wp_die( __( 'Please upload a file to import', 'pojo' ) );
+					wp_die( __( 'Please upload a file to import', 'pojo-importer' ) );
 				
 				$this->handle_import_customizer( $import_file );
 				wp_redirect( $this->get_setting_local_url( 'customizer_imported' ) );
@@ -65,7 +65,7 @@ class Pojo_Importer_Settings {
 				$import_file = $_FILES['import_file']['tmp_name'];
 
 				if ( empty( $import_file ) )
-					wp_die( __( 'Please upload a file to import', 'pojo' ) );
+					wp_die( __( 'Please upload a file to import', 'pojo-importer' ) );
 
 				$this->handle_import_widgets( $import_file );
 				wp_redirect( $this->get_setting_local_url( 'widgets_imported' ) );
@@ -79,15 +79,15 @@ class Pojo_Importer_Settings {
 	public function admin_notices() {
 		switch ( filter_input( INPUT_GET, 'message_id' ) ) {
 			case 'content_imported' :
-				printf( '<div class="updated"><p>%s</p></div>', __( 'Content successfully.', 'pojo' ) );
+				printf( '<div class="updated"><p>%s</p></div>', __( 'Content successfully.', 'pojo-importer' ) );
 				break;
 			
 			case 'customizer_imported' :
-				printf( '<div class="updated"><p>%s</p></div>', __( 'Customizer successfully.', 'pojo' ) );
+				printf( '<div class="updated"><p>%s</p></div>', __( 'Customizer successfully.', 'pojo-importer' ) );
 				break;
 			
 			case 'widgets_imported' :
-				printf( '<div class="updated"><p>%s</p></div>', __( 'Widgets successfully.', 'pojo' ) );
+				printf( '<div class="updated"><p>%s</p></div>', __( 'Widgets successfully.', 'pojo-importer' ) );
 				break;
 		}
 	}
@@ -330,14 +330,12 @@ class Pojo_Importer_Settings {
 
 			<div>
 				<p style="color: #ff0000;"><?php _e( 'Please Note: If there is content in the existing site, you may not want to import the demo content, it could change the content structure.', 'pojo-importer' ); ?></p>
-				<p><button type="submit" class="button"><?php _e( 'Import', 'pojo-importer' ); ?></button></p>
+				<p><button type="submit" class="button button-primary"><?php _e( 'Import', 'pojo-importer' ); ?></button></p>
 			</div>
-			
-			
-			<div style="background-color: #fff;padding: 1px 12px;box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);">
-				<p>Problem with a auto demo import? Please go to the Demo Import - Manual Installation and import files from your computer</p>
 
-				<a href="<?php echo esc_attr( $this->get_setting_local_url() ); ?>">Local Method</a>
+
+			<div style="background-color: #fff;padding: 1px 12px;box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);">
+				<p><?php printf( __( 'Problem with a auto demo import? Please go to the <a href="%s">Demo Import - Manual Installation</a> and import files from your computer', 'pojo-importer' ), esc_attr( $this->get_setting_local_url() ) ); ?></p>
 			</div>
 		</form>
 		<?php
@@ -351,7 +349,7 @@ class Pojo_Importer_Settings {
 		<div class="updated" style="border: none;">
 			<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce, Menus and Front Page), Customizer and Widgets.', 'pojo-importer' ); ?></p>
 
-			<p><?php _e( 'Need Help? Please go to Demo Import Guide to learn more.', 'pojo-importer' ); ?></p>
+			<p><?php _e( '<strong>Need Help?</strong> Please go to <a href="http://pojo.me/go/demo-import-guide/">Demo Import Guide</a> to learn more.', 'pojo-importer' ); ?></p>
 		</div>
 
 		<hr />
@@ -369,13 +367,13 @@ class Pojo_Importer_Settings {
 			<input type="hidden" name="pojo-imported-action" value="content" />
 			<p>
 				<label>
-					<?php _e( 'Choose a file from your computer:', 'pojo' ); ?>
+					<?php _e( 'Choose a file from your computer:', 'pojo-importer' ); ?>
 					<input type="file" class="pojo-import-file" name="import_file" accept="application/xml" />
 				</label>
 			</p>
 			<p style="color: #ff0000;"><?php _e( 'Please Note: If there is content in the existing site, you may not want to import the demo content, it could change the content structure.', 'pojo-importer' ); ?></p>
 			<p class="submit">
-				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Content', 'pojo' ); ?>" disabled />
+				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Content', 'pojo-importer' ); ?>" disabled />
 			</p>
 		</form>
 
@@ -391,12 +389,12 @@ class Pojo_Importer_Settings {
 			<input type="hidden" name="pojo-imported-action" value="customizer" />
 			<p>
 				<label>
-					<?php _e( 'Choose a file from your computer:', 'pojo' ); ?>
+					<?php _e( 'Choose a file from your computer:', 'pojo-importer' ); ?>
 					<input type="file" class="pojo-import-file" name="import_file" accept="application/json" />
 				</label>
 			</p>
 			<p class="submit">
-				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Customizer', 'pojo' ); ?>" disabled />
+				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Customizer', 'pojo-importer' ); ?>" disabled />
 			</p>
 		</form>
 
@@ -410,12 +408,12 @@ class Pojo_Importer_Settings {
 			<input type="hidden" name="pojo-imported-action" value="widgets" />
 			<p>
 				<label>
-					<?php _e( 'Choose a file from your computer:', 'pojo' ); ?>
+					<?php _e( 'Choose a file from your computer:', 'pojo-importer' ); ?>
 					<input type="file" class="pojo-import-file" name="import_file" accept="application/json" />
 				</label>
 			</p>
 			<p class="submit">
-				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Widgets', 'pojo' ); ?>" disabled />
+				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Widgets', 'pojo-importer' ); ?>" disabled />
 			</p>
 		</form>
 		
