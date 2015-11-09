@@ -367,7 +367,7 @@ class Pojo_Importer_Settings {
 			<input type="hidden" name="pojo-imported-action" value="content" />
 			<p>
 				<label>
-					<?php _e( 'Choose a file from your computer:', 'pojo-importer' ); ?>
+					<?php _e( 'Choose a XML file:', 'pojo-importer' ); ?>
 					<input type="file" class="pojo-import-file" name="import_file" accept="application/xml" />
 				</label>
 			</p>
@@ -389,7 +389,7 @@ class Pojo_Importer_Settings {
 			<input type="hidden" name="pojo-imported-action" value="customizer" />
 			<p>
 				<label>
-					<?php _e( 'Choose a file from your computer:', 'pojo-importer' ); ?>
+					<?php _e( 'Choose a JSON file:', 'pojo-importer' ); ?>
 					<input type="file" class="pojo-import-file" name="import_file" accept="application/json" />
 				</label>
 			</p>
@@ -408,7 +408,7 @@ class Pojo_Importer_Settings {
 			<input type="hidden" name="pojo-imported-action" value="widgets" />
 			<p>
 				<label>
-					<?php _e( 'Choose a file from your computer:', 'pojo-importer' ); ?>
+					<?php _e( 'Choose a JSON file:', 'pojo-importer' ); ?>
 					<input type="file" class="pojo-import-file" name="import_file" accept="application/json" />
 				</label>
 			</p>
