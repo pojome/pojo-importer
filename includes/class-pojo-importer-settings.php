@@ -339,16 +339,16 @@ class Pojo_Importer_Settings {
 		?>
 		<h2><?php _e( 'Demo Import (Manual Installation)', 'pojo-importer' ); ?> <small><a href="#"><?php _e( 'Back to Auto Installation', 'pojo-importer' ); ?></a></small></h2>
 
-		<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and Front Page.', 'pojo-importer' ); ?></p>
+		<p><?php _e( 'Using the demo import allows you to import all the demo content (Posts, Pages, Galleries, Slideshows, WooCommerce, Menus and Front Page), Customizer and Widgets.', 'pojo-importer' ); ?></p>
 
-		<p><?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-importer' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
-
-		<p><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
+		<hr />
 
 		<form method="post" enctype="multipart/form-data">
 			<h3><?php _e( 'Import Content', 'pojo-importer' ); ?></h3>
 
-			<p><?php _e( 'The demo content: Posts, Pages, Galleries, Slideshows, WooCommerce, Front Page & Menus', 'pojo-importer' ); ?></p>
+			<p><?php _e( 'The demo content: Posts, Pages, Galleries, Slideshows, WooCommerce, Front Page and Menus.', 'pojo-importer' ); ?> <?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-importer' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
+
+			<p><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
 
 			<p><?php _e( 'Upload content file and we\'ll import the content into this site. Choose a content-en.xml file to upload, then click Import Content.', 'pojo-importer' ); ?></p>
 			
@@ -360,6 +360,7 @@ class Pojo_Importer_Settings {
 					<input type="file" class="pojo-import-file" name="import_file" />
 				</label>
 			</p>
+			<p style="color: #ff0000;"><?php _e( 'Please Note: If there is content in the existing site, you may not want to import the demo content, it could change the content structure.', 'pojo-importer' ); ?></p>
 			<p class="submit">
 				<input type="submit" name="submit" class="button pojo-import-submit" value="<?php _e( 'Import Content', 'pojo' ); ?>" />
 			</p>
