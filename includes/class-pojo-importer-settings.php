@@ -27,6 +27,8 @@ class Pojo_Importer_Settings {
 	public function manager_actions() {
 		if ( empty( $_POST['pojo-imported-action'] ) )
 			return;
+
+		$this->setup_import();
 		
 		switch ( $_POST['pojo-imported-action'] ) {
 			case 'content' :
@@ -68,6 +70,9 @@ class Pojo_Importer_Settings {
 				wp_redirect( $this->get_setting_local_url( 'widgets_imported' ) );
 				die;
 		}
+
+		wp_redirect( $this->get_setting_local_url() );
+		die;
 	}
 
 	public function admin_notices() {
