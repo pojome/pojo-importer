@@ -79,15 +79,15 @@ class Pojo_Importer_Settings {
 	public function admin_notices() {
 		switch ( filter_input( INPUT_GET, 'message_id' ) ) {
 			case 'content_imported' :
-				printf( '<div class="updated"><p>%s</p></div>', __( 'Content successfully.', 'pojo-importer' ) );
+				printf( '<div class="updated"><p>%s</p></div>', __( 'The demo content has been successfully imported!', 'pojo-importer' ) );
 				break;
 			
 			case 'customizer_imported' :
-				printf( '<div class="updated"><p>%s</p></div>', __( 'Customizer successfully.', 'pojo-importer' ) );
+				printf( '<div class="updated"><p>%s</p></div>', __( 'The customizer content has been successfully imported!', 'pojo-importer' ) );
 				break;
 			
 			case 'widgets_imported' :
-				printf( '<div class="updated"><p>%s</p></div>', __( 'Widgets successfully.', 'pojo-importer' ) );
+				printf( '<div class="updated"><p>%s</p></div>', __( 'The widgets content has been successfully imported!', 'pojo-importer' ) );
 				break;
 		}
 	}
@@ -403,7 +403,7 @@ class Pojo_Importer_Settings {
 		<form method="post" enctype="multipart/form-data" class="pojo-importer-form">
 			<h3><?php _e( 'Import Widgets', 'pojo-importer' ); ?></h3>
 
-			<p><?php _e( 'Upload content file and we\'ll import the content into this site. Choose a widgets-en.json file to upload, then click Import Widgets.', 'pojo-importer' ); ?></p>
+			<p><?php _e( 'Upload widgets file and we\'ll import the content into this site. Choose a widgets-en.json file to upload, then click Import Widgets.', 'pojo-importer' ); ?></p>
 			<?php wp_nonce_field( 'pojo-imported-nonce-widgets' ); ?>
 			<input type="hidden" name="pojo-imported-action" value="widgets" />
 			<p>
