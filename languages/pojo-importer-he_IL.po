@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-import 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-10 14:29+0200\n"
-"PO-Revision-Date: 2015-11-10 14:41+0200\n"
+"POT-Creation-Date: 2015-11-10 14:45+0200\n"
+"PO-Revision-Date: 2015-11-10 15:56+0200\n"
 "Last-Translator: Ariel Klikstein <a@arielk.net>\n"
 "Language-Team: he_IL <LL@li.org>\n"
 "Language: he_IL\n"
@@ -36,16 +36,16 @@ msgid "Please upload a file to import"
 msgstr "יש להעלות קובץ כדי לייבא"
 
 #: includes/class-pojo-importer-settings.php:82
-msgid "Content successfully."
-msgstr ""
+msgid "The demo content has been successfully imported!"
+msgstr "תוכן הדמו יובא בהצלחה!"
 
 #: includes/class-pojo-importer-settings.php:86
-msgid "Customizer successfully."
-msgstr ""
+msgid "The customizer content has been successfully imported!"
+msgstr "תוכן התאמה אישית יובא בהצלחה!"
 
 #: includes/class-pojo-importer-settings.php:90
-msgid "Widgets successfully."
-msgstr ""
+msgid "The widgets content has been successfully imported!"
+msgstr "תוכן הוידג'טים יובא בהצלחה!"
 
 #: includes/class-pojo-importer-settings.php:125
 msgid "English"
@@ -67,8 +67,8 @@ msgid ""
 "Pages, Galleries, Slideshows, WooCommerce), Widgets, Menus, Customizer and "
 "Front Page."
 msgstr ""
-"באמצעות ייבוא דמו ניתן ליבא את כל תוכן האתר (פוסטים, עמודים, גלריות, מצגות, "
-"WooCommerce), וידג'טים, תפריטים והגדרת דף הבית."
+"באמצעות ייבוא דמו ניתן לייבא את כל תוכן האתר (פוסטים, עמודים, גלריות, מצגות, "
+"חנות), וידג'טים, תפריטים והגדרת דף הבית."
 
 #: includes/class-pojo-importer-settings.php:268
 #: includes/class-pojo-importer-settings.php:360
@@ -154,7 +154,7 @@ msgid ""
 "Pages, Galleries, Slideshows, WooCommerce, Menus and Front Page), Customizer "
 "and Widgets."
 msgstr ""
-"באמצעות ייבוא דמו ניתן ליבא את כל תוכן האתר (פוסטים, עמודים, גלריות, מצגות, "
+"באמצעות ייבוא דמו ניתן לייבא את כל תוכן האתר (פוסטים, עמודים, גלריות, מצגות, "
 "חנות, תפריטים ועמוד ראשי), וידג'טים והתאמה אישית."
 
 #: includes/class-pojo-importer-settings.php:352
@@ -162,7 +162,7 @@ msgid ""
 "<strong>Need Help?</strong> Please go to <a href=\"http://pojo.me/go/demo-"
 "import-guide/\">Demo Import Guide</a> to learn more."
 msgstr ""
-"<strong>צריך עזרה?</strong> אנא עבור אל <a href=\"http://pojo..co.il/go/demo-"
+"<strong>צריך עזרה?</strong> אנא עבור אל <a href=\"http://pojo.co.il/go/demo-"
 "import-guide/\">מדריך ייבוא הדמו</a> כדי ללמוד עוד."
 
 #: includes/class-pojo-importer-settings.php:358
@@ -199,9 +199,8 @@ msgid ""
 "site. Choose a customizer-en.json file to upload, then click Import "
 "Customizer."
 msgstr ""
-"יש להעלות קובץ הגדרות של התאמה אישית כדי לייבא את אפשרויות לתוך האתר. יש "
-"לבחור קובץ בשם customizer-he.json להעלאה ולאחר מכן ללחוץ על כפתור ייבוא "
-"התאמה אישית"
+"יש להעלות קובץ אפשרויות התאמה אישית ולייבא אותו לתוך האתר. יש לבחור קובץ בשם "
+"customizer-he.json להעלאה ולאחר מכן ללחוץ על כפתור ייבוא התאמה אישית"
 
 #: includes/class-pojo-importer-settings.php:392
 #: includes/class-pojo-importer-settings.php:411
@@ -215,9 +214,11 @@ msgstr "ייבוא וידג'טים"
 
 #: includes/class-pojo-importer-settings.php:406
 msgid ""
-"Upload content file and we'll import the content into this site. Choose a "
+"Upload widgets file and we'll import the content into this site. Choose a "
 "widgets-en.json file to upload, then click Import Widgets."
 msgstr ""
+"יש להעלות קובץ תוכן וידג'טים ולייבא אותו לתוך האתר. יש לבחור קובץ בשם "
+"customizer-he.json להעלאה ולאחר מכן ללחוץ על כפתור ייבוא וידג'טים"
 
 #: includes/class-pojo-importer-settings.php:433
 msgid "Loading"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-importer 1.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-10 14:03+0200\n"
+"POT-Creation-Date: 2015-11-10 14:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,15 +29,15 @@ msgid "Please upload a file to import"
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:82
-msgid "Content successfully."
+msgid "The demo content has been successfully imported!"
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:86
-msgid "Customizer successfully."
+msgid "The customizer content has been successfully imported!"
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:90
-msgid "Widgets successfully."
+msgid "The widgets content has been successfully imported!"
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:125
@@ -189,7 +189,7 @@ msgstr ""
 
 #: includes/class-pojo-importer-settings.php:406
 msgid ""
-"Upload content file and we'll import the content into this site. Choose a "
+"Upload widgets file and we'll import the content into this site. Choose a "
 "widgets-en.json file to upload, then click Import Widgets."
 msgstr ""
 
