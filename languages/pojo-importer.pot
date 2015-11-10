@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-importer 1.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-09 18:40+0200\n"
+"POT-Creation-Date: 2015-11-10 14:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,8 +118,9 @@ msgstr ""
 #: includes/class-pojo-importer-settings.php:338
 #, php-format
 msgid ""
-"Problem with a auto demo import? Please go to the <a href=\"%s\">Demo Import "
-"- Manual Installation</a> and import files from your computer"
+"Problem with an auto demo import? Please go to the <a href=\"%s\">Demo "
+"Import - Manual Installation</a> to manually import the files from your "
+"computer"
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:347
@@ -161,9 +162,7 @@ msgid ""
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:370
-#: includes/class-pojo-importer-settings.php:392
-#: includes/class-pojo-importer-settings.php:411
-msgid "Choose a file from your computer:"
+msgid "Choose an XML file:"
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:383
@@ -176,6 +175,11 @@ msgid ""
 "Upload your Customizer Settings file and we'll import the options into this "
 "site. Choose a customizer-en.json file to upload, then click Import "
 "Customizer."
+msgstr ""
+
+#: includes/class-pojo-importer-settings.php:392
+#: includes/class-pojo-importer-settings.php:411
+msgid "Choose a JSON file:"
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:404
