@@ -335,7 +335,7 @@ class Pojo_Importer_Settings {
 
 
 			<div style="background-color: #fff;padding: 1px 12px;box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);">
-				<p><?php printf( __( 'Problem with a auto demo import? Please go to the <a href="%s">Demo Import - Manual Installation</a> and import files from your computer', 'pojo-importer' ), esc_attr( $this->get_setting_local_url() ) ); ?></p>
+				<p><?php printf( __( 'Problem with an auto demo import? Please go to the <a href="%s">Demo Import - Manual Installation</a> to manually import the files from your computer', 'pojo-importer' ), esc_attr( $this->get_setting_local_url() ) ); ?></p>
 			</div>
 		</form>
 		<?php
@@ -367,7 +367,7 @@ class Pojo_Importer_Settings {
 			<input type="hidden" name="pojo-imported-action" value="content" />
 			<p>
 				<label>
-					<?php _e( 'Choose a XML file:', 'pojo-importer' ); ?>
+					<?php _e( 'Choose an XML file:', 'pojo-importer' ); ?>
 					<input type="file" class="pojo-import-file" name="import_file" accept="application/xml" />
 				</label>
 			</p>
