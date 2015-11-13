@@ -4,8 +4,8 @@
 **Contributors:** pojo.me, KingYes, ariel.k  
 **Tags:** Import, Importer,  
 **Requires at least:** 4.1  
-**Tested up to:** 4.2.2  
-**Stable tag:** 1.1.4  
+**Tested up to:** 4.3.1  
+**Stable tag:** 1.2.0  
 **License:** GPLv2 or later  
 
 Import posts, pages, widgets, menus, customizer, front page and more to your theme which works with Pojo Framework.
@@ -50,6 +50,9 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 1. Enjoy!
 
 ## Changelog ##
+
+### 1.2.0 ###
+* New! - Added manual installation of the dummy data
 
 ### 1.1.4 ###
 * Tweak! - Added note for existing content site
