@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-importer 1.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-13 07:28+0200\n"
+"POT-Creation-Date: 2015-11-15 15:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -424,4 +424,18 @@ msgstr ""
 
 #: pojo-importer.php:63 pojo-importer.php:74
 msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: pojo-importer.php:93
+#, php-format
+msgid ""
+"<a href=\"%s\" target=\"_blank\">Pojo Theme</a> is not active. Please "
+"activate any theme by Pojo.me before you are using \"Pojo Importer\" plugin."
+msgstr ""
+
+#: pojo-importer.php:97
+#, php-format
+msgid ""
+"The Pojo Importer is not supported by this version of %s. Please <a href=\"%s"
+"\">upgrade the theme to its latest version</a>."
 msgstr ""

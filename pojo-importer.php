@@ -89,11 +89,25 @@ final class Pojo_Importer {
 		$this->settings = new Pojo_Importer_Settings();
 	}
 
+	public function admin_notices() {
+		echo '<div class="error"><p>' . sprintf( __( '<a href="%s" target="_blank">Pojo Theme</a> is not active. Please activate any theme by Pojo.me before you are using "Pojo Importer" plugin.', 'pojo-importer' ), 'http://pojo.me/' ) . '</p></div>';
+	}
+
+	public function print_update_error() {
+		echo '<div class="error"><p>' . sprintf( __( 'The Pojo Importer is not supported by this version of %s. Please <a href="%s">upgrade the theme to its latest version</a>.', 'pojo-importer' ), Pojo_Core::instance()->licenses->updater->theme_name, admin_url( 'update-core.php' ) ) . '</p></div>';
+	}
+
 	public function bootstrap() {
 		// This plugin for Pojo Themes..
-		// TODO: Add notice for non-pojo theme
-		if ( ! class_exists( 'Pojo_Core' ) )
+		if ( ! class_exists( 'Pojo_Core' ) ) {
+			add_action( 'admin_notices', array( &$this, 'admin_notices' ) );
 			return;
+		}
+
+		if ( version_compare( '1.5.7', Pojo_Core::instance()->get_version(), '>' ) ) {
+			add_action( 'admin_notices', array( &$this, 'print_update_error' ) );
+			return;
+		}
 
 		add_action( 'pojo_framework_base_settings_included', array( &$this, 'register_settings' ) );
 	}
@@ -106,4 +120,4 @@ final class Pojo_Importer {
 }
 
 Pojo_Importer::instance();
-// EOF
+// EOF/ EOF

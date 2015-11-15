@@ -151,7 +151,7 @@ class Pojo_Importer_Settings {
 					'body' => array(
 						'pojo_action' => 'get_import_files',
 						'theme' => Pojo_Core::instance()->licenses->updater->theme_name,
-						'license' => Pojo_Core::instance()->licenses->settings->get_license_key(),
+						'license' => Pojo_Core::instance()->licenses->get_license_key(),
 						'lang' => $_POST['lang'],
 					)
 				)
