@@ -39,8 +39,8 @@ class WXR_Parser {
 				echo $error[0] . ':' . $error[1] . ' ' . esc_html( $error[2] );
 			}
 			echo '</pre>';
-			echo '<p><strong>' . __( 'There was an error when reading this WXR file', 'pojo-importer' ) . '</strong><br />';
-			echo __( 'Details are shown above. The importer will now try again with a different parser...', 'pojo-importer' ) . '</p>';
+			echo '<p><strong>' . __( 'There was an error when reading this WXR file', 'wordpress-importer' ) . '</strong><br />';
+			echo __( 'Details are shown above. The importer will now try again with a different parser...', 'wordpress-importer' ) . '</p>';
 		}
 
 		// use regular expressions if nothing else available or this is bad XML
@@ -69,7 +69,7 @@ class WXR_Parser_SimpleXML {
 		}
 
 		if ( ! $success || isset( $dom->doctype ) ) {
-			return new WP_Error( 'SimpleXML_parse_error', __( 'There was an error when reading this WXR file', 'pojo-importer' ), libxml_get_errors() );
+			return new WP_Error( 'SimpleXML_parse_error', __( 'There was an error when reading this WXR file', 'wordpress-importer' ), libxml_get_errors() );
 		}
 
 		$xml = simplexml_import_dom( $dom );
@@ -77,16 +77,16 @@ class WXR_Parser_SimpleXML {
 
 		// halt if loading produces an error
 		if ( ! $xml )
-			return new WP_Error( 'SimpleXML_parse_error', __( 'There was an error when reading this WXR file', 'pojo-importer' ), libxml_get_errors() );
+			return new WP_Error( 'SimpleXML_parse_error', __( 'There was an error when reading this WXR file', 'wordpress-importer' ), libxml_get_errors() );
 
 		$wxr_version = $xml->xpath('/rss/channel/wp:wxr_version');
 		if ( ! $wxr_version )
-			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'pojo-importer' ) );
+			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer' ) );
 
 		$wxr_version = (string) trim( $wxr_version[0] );
 		// confirm that we are dealing with the correct file format
 		if ( ! preg_match( '/^\d+\.\d+$/', $wxr_version ) )
-			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'pojo-importer' ) );
+			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer' ) );
 
 		$base_url = $xml->xpath('/rss/channel/wp:base_site_url');
 		$base_url = (string) trim( $base_url[0] );
@@ -114,28 +114,46 @@ class WXR_Parser_SimpleXML {
 		// grab cats, tags and terms
 		foreach ( $xml->xpath('/rss/channel/wp:category') as $term_arr ) {
 			$t = $term_arr->children( $namespaces['wp'] );
-			$categories[] = array(
+			$category = array(
 				'term_id' => (int) $t->term_id,
 				'category_nicename' => (string) $t->category_nicename,
 				'category_parent' => (string) $t->category_parent,
 				'cat_name' => (string) $t->cat_name,
 				'category_description' => (string) $t->category_description
 			);
+
+			foreach ( $t->termmeta as $meta ) {
+				$category['termmeta'][] = array(
+					'key' => (string) $meta->meta_key,
+					'value' => (string) $meta->meta_value
+				);
+			}
+
+			$categories[] = $category;
 		}
 
 		foreach ( $xml->xpath('/rss/channel/wp:tag') as $term_arr ) {
 			$t = $term_arr->children( $namespaces['wp'] );
-			$tags[] = array(
+			$tag = array(
 				'term_id' => (int) $t->term_id,
 				'tag_slug' => (string) $t->tag_slug,
 				'tag_name' => (string) $t->tag_name,
 				'tag_description' => (string) $t->tag_description
 			);
+
+			foreach ( $t->termmeta as $meta ) {
+				$tag['termmeta'][] = array(
+					'key' => (string) $meta->meta_key,
+					'value' => (string) $meta->meta_value
+				);
+			}
+
+			$tags[] = $tag;
 		}
 
 		foreach ( $xml->xpath('/rss/channel/wp:term') as $term_arr ) {
 			$t = $term_arr->children( $namespaces['wp'] );
-			$terms[] = array(
+			$term = array(
 				'term_id' => (int) $t->term_id,
 				'term_taxonomy' => (string) $t->term_taxonomy,
 				'slug' => (string) $t->term_slug,
@@ -143,6 +161,15 @@ class WXR_Parser_SimpleXML {
 				'term_name' => (string) $t->term_name,
 				'term_description' => (string) $t->term_description
 			);
+
+			foreach ( $t->termmeta as $meta ) {
+				$term['termmeta'][] = array(
+					'key' => (string) $meta->meta_key,
+					'value' => (string) $meta->meta_value
+				);
+			}
+
+			$terms[] = $term;
 		}
 
 		// grab posts
@@ -204,7 +231,7 @@ class WXR_Parser_SimpleXML {
 						);
 					}
 				}
-			
+
 				$post['comments'][] = array(
 					'comment_id' => (int) $comment->comment_id,
 					'comment_author' => (string) $comment->comment_author,
@@ -276,7 +303,7 @@ class WXR_Parser_XML {
 		xml_parser_free( $xml );
 
 		if ( ! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) )
-			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'pojo-importer' ) );
+			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer' ) );
 
 		return array(
 			'authors' => $this->authors,
@@ -324,7 +351,11 @@ class WXR_Parser_XML {
 		if ( ! trim( $cdata ) )
 			return;
 
-		$this->cdata .= trim( $cdata );
+		if ( false !== $this->in_tag || false !== $this->in_sub_tag ) {
+			$this->cdata .= $cdata;
+		} else {
+			$this->cdata .= trim( $cdata );
+		}
 	}
 
 	function tag_close( $parser, $tag ) {
@@ -461,7 +492,7 @@ class WXR_Parser_Regex {
 		}
 
 		if ( ! $wxr_version )
-			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'pojo-importer' ) );
+			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer' ) );
 
 		return array(
 			'authors' => $this->authors,

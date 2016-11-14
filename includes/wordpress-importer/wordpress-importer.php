@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/wordpress-importer/
 Description: Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file.
 Author: wordpressdotorg
 Author URI: http://wordpress.org/
-Version: 0.6.1
+Version: 0.6.3
 Text Domain: wordpress-importer
 License: GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
@@ -62,8 +62,6 @@ class WP_Import extends WP_Importer {
 	var $fetch_attachments = false;
 	var $url_remap = array();
 	var $featured_images = array();
-
-	function WP_Import() { /* nothing */ }
 
 	/**
 	 * Registered callback function for the WordPress Importer
@@ -131,8 +129,8 @@ class WP_Import extends WP_Importer {
 	 */
 	function import_start( $file ) {
 		if ( ! is_file($file) ) {
-			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'pojo-importer' ) . '</strong><br />';
-			echo __( 'The file does not exist, please try again.', 'pojo-importer' ) . '</p>';
+			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'wordpress-importer' ) . '</strong><br />';
+			echo __( 'The file does not exist, please try again.', 'wordpress-importer' ) . '</p>';
 			$this->footer();
 			die();
 		}
@@ -140,7 +138,7 @@ class WP_Import extends WP_Importer {
 		$import_data = $this->parse( $file );
 
 		if ( is_wp_error( $import_data ) ) {
-			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'pojo-importer' ) . '</strong><br />';
+			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'wordpress-importer' ) . '</strong><br />';
 			echo esc_html( $import_data->get_error_message() ) . '</p>';
 			$this->footer();
 			die();
@@ -175,8 +173,8 @@ class WP_Import extends WP_Importer {
 		wp_defer_term_counting( false );
 		wp_defer_comment_counting( false );
 
-		echo '<p>' . __( 'All done.', 'pojo-importer' ) . ' <a href="' . admin_url() . '">' . __( 'Have fun!', 'pojo-importer' ) . '</a>' . '</p>';
-		echo '<p>' . __( 'Remember to update the passwords and roles of imported users.', 'pojo-importer' ) . '</p>';
+		echo '<p>' . __( 'All done.', 'wordpress-importer' ) . ' <a href="' . admin_url() . '">' . __( 'Have fun!', 'wordpress-importer' ) . '</a>' . '</p>';
+		echo '<p>' . __( 'Remember to update the passwords and roles of imported users.', 'wordpress-importer' ) . '</p>';
 
 		do_action( 'import_end' );
 	}
@@ -191,12 +189,12 @@ class WP_Import extends WP_Importer {
 		$file = wp_import_handle_upload();
 
 		if ( isset( $file['error'] ) ) {
-			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'pojo-importer' ) . '</strong><br />';
+			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'wordpress-importer' ) . '</strong><br />';
 			echo esc_html( $file['error'] ) . '</p>';
 			return false;
 		} else if ( ! file_exists( $file['file'] ) ) {
-			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'pojo-importer' ) . '</strong><br />';
-			printf( __( 'The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem.', 'pojo-importer' ), esc_html( $file['file'] ) );
+			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'wordpress-importer' ) . '</strong><br />';
+			printf( __( 'The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem.', 'wordpress-importer' ), esc_html( $file['file'] ) );
 			echo '</p>';
 			return false;
 		}
@@ -204,7 +202,7 @@ class WP_Import extends WP_Importer {
 		$this->id = (int) $file['id'];
 		$import_data = $this->parse( $file['file'] );
 		if ( is_wp_error( $import_data ) ) {
-			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'pojo-importer' ) . '</strong><br />';
+			echo '<p><strong>' . __( 'Sorry, there has been an error.', 'wordpress-importer' ) . '</strong><br />';
 			echo esc_html( $import_data->get_error_message() ) . '</p>';
 			return false;
 		}
@@ -212,7 +210,7 @@ class WP_Import extends WP_Importer {
 		$this->version = $import_data['version'];
 		if ( $this->version > $this->max_wxr_version ) {
 			echo '<div class="error"><p><strong>';
-			printf( __( 'This WXR file (version %s) may not be supported by this version of the importer. Please consider updating.', 'pojo-importer' ), esc_html($import_data['version']) );
+			printf( __( 'This WXR file (version %s) may not be supported by this version of the importer. Please consider updating.', 'wordpress-importer' ), esc_html($import_data['version']) );
 			echo '</strong></p></div>';
 		}
 
@@ -237,7 +235,7 @@ class WP_Import extends WP_Importer {
 			foreach ( $import_data['posts'] as $post ) {
 				$login = sanitize_user( $post['post_author'], true );
 				if ( empty( $login ) ) {
-					printf( __( 'Failed to import author %s. Their posts will be attributed to the current user.', 'pojo-importer' ), esc_html( $post['post_author'] ) );
+					printf( __( 'Failed to import author %s. Their posts will be attributed to the current user.', 'wordpress-importer' ), esc_html( $post['post_author'] ) );
 					echo '<br />';
 					continue;
 				}
@@ -263,10 +261,10 @@ class WP_Import extends WP_Importer {
 	<input type="hidden" name="import_id" value="<?php echo $this->id; ?>" />
 
 <?php if ( ! empty( $this->authors ) ) : ?>
-	<h3><?php _e( 'Assign Authors', 'pojo-importer' ); ?></h3>
-	<p><?php _e( 'To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries.', 'pojo-importer' ); ?></p>
+	<h3><?php _e( 'Assign Authors', 'wordpress-importer' ); ?></h3>
+	<p><?php _e( 'To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries.', 'wordpress-importer' ); ?></p>
 <?php if ( $this->allow_create_users() ) : ?>
-	<p><?php printf( __( 'If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary.', 'pojo-importer' ), esc_html( get_option('default_role') ) ); ?></p>
+	<p><?php printf( __( 'If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary.', 'wordpress-importer' ), esc_html( get_option('default_role') ) ); ?></p>
 <?php endif; ?>
 	<ol id="authors">
 <?php foreach ( $this->authors as $author ) : ?>
@@ -276,14 +274,14 @@ class WP_Import extends WP_Importer {
 <?php endif; ?>
 
 <?php if ( $this->allow_fetch_attachments() ) : ?>
-	<h3><?php _e( 'Import Attachments', 'pojo-importer' ); ?></h3>
+	<h3><?php _e( 'Import Attachments', 'wordpress-importer' ); ?></h3>
 	<p>
 		<input type="checkbox" value="1" name="fetch_attachments" id="import-attachments" />
-		<label for="import-attachments"><?php _e( 'Download and import file attachments', 'pojo-importer' ); ?></label>
+		<label for="import-attachments"><?php _e( 'Download and import file attachments', 'wordpress-importer' ); ?></label>
 	</p>
 <?php endif; ?>
 
-	<p class="submit"><input type="submit" class="button" value="<?php esc_attr_e( 'Submit', 'pojo-importer' ); ?>" /></p>
+	<p class="submit"><input type="submit" class="button" value="<?php esc_attr_e( 'Submit', 'wordpress-importer' ); ?>" /></p>
 </form>
 <?php
 	}
@@ -296,7 +294,7 @@ class WP_Import extends WP_Importer {
 	 * @param array $author Author information, e.g. login, display name, email
 	 */
 	function author_select( $n, $author ) {
-		_e( 'Import author:', 'pojo-importer' );
+		_e( 'Import author:', 'wordpress-importer' );
 		echo ' <strong>' . esc_html( $author['author_display_name'] );
 		if ( $this->version != '1.0' ) echo ' (' . esc_html( $author['author_login'] ) . ')';
 		echo '</strong><br />';
@@ -307,10 +305,10 @@ class WP_Import extends WP_Importer {
 		$create_users = $this->allow_create_users();
 		if ( $create_users ) {
 			if ( $this->version != '1.0' ) {
-				_e( 'or create new user with login name:', 'pojo-importer' );
+				_e( 'or create new user with login name:', 'wordpress-importer' );
 				$value = '';
 			} else {
-				_e( 'as a new user:', 'pojo-importer' );
+				_e( 'as a new user:', 'wordpress-importer' );
 				$value = esc_attr( sanitize_user( $author['author_login'], true ) );
 			}
 
@@ -318,10 +316,10 @@ class WP_Import extends WP_Importer {
 		}
 
 		if ( ! $create_users && $this->version == '1.0' )
-			_e( 'assign posts to an existing user:', 'pojo-importer' );
+			_e( 'assign posts to an existing user:', 'wordpress-importer' );
 		else
-			_e( 'or assign posts to an existing user:', 'pojo-importer' );
-		wp_dropdown_users( array( 'name' => "user_map[$n]", 'multi' => true, 'show_option_all' => __( '- Select -', 'pojo-importer' ) ) );
+			_e( 'or assign posts to an existing user:', 'wordpress-importer' );
+		wp_dropdown_users( array( 'name' => "user_map[$n]", 'multi' => true, 'show_option_all' => __( '- Select -', 'wordpress-importer' ) ) );
 		echo '<input type="hidden" name="imported_authors['.$n.']" value="' . esc_attr( $author['author_login'] ) . '" />';
 
 		if ( $this->version != '1.0' )
@@ -371,7 +369,7 @@ class WP_Import extends WP_Importer {
 						$this->processed_authors[$old_id] = $user_id;
 					$this->author_mapping[$santized_old_login] = $user_id;
 				} else {
-					printf( __( 'Failed to create new user for %s. Their posts will be attributed to the current user.', 'pojo-importer' ), esc_html($this->authors[$old_login]['author_display_name']) );
+					printf( __( 'Failed to create new user for %s. Their posts will be attributed to the current user.', 'wordpress-importer' ), esc_html($this->authors[$old_login]['author_display_name']) );
 					if ( defined('IMPORT_DEBUG') && IMPORT_DEBUG )
 						echo ' ' . $user_id->get_error_message();
 					echo '<br />';
@@ -416,18 +414,21 @@ class WP_Import extends WP_Importer {
 				'cat_name' => $cat['cat_name'],
 				'category_description' => $category_description
 			);
+			$catarr = wp_slash( $catarr );
 
 			$id = wp_insert_category( $catarr );
 			if ( ! is_wp_error( $id ) ) {
 				if ( isset($cat['term_id']) )
 					$this->processed_terms[intval($cat['term_id'])] = $id;
 			} else {
-				printf( __( 'Failed to import category %s', 'pojo-importer' ), esc_html($cat['category_nicename']) );
+				printf( __( 'Failed to import category %s', 'wordpress-importer' ), esc_html($cat['category_nicename']) );
 				if ( defined('IMPORT_DEBUG') && IMPORT_DEBUG )
 					echo ': ' . $id->get_error_message();
 				echo '<br />';
 				continue;
 			}
+
+			$this->process_termmeta( $cat, $id['term_id'] );
 		}
 
 		unset( $this->categories );
@@ -454,6 +455,7 @@ class WP_Import extends WP_Importer {
 				continue;
 			}
 
+			$tag = wp_slash( $tag );
 			$tag_desc = isset( $tag['tag_description'] ) ? $tag['tag_description'] : '';
 			$tagarr = array( 'slug' => $tag['tag_slug'], 'description' => $tag_desc );
 
@@ -462,12 +464,14 @@ class WP_Import extends WP_Importer {
 				if ( isset($tag['term_id']) )
 					$this->processed_terms[intval($tag['term_id'])] = $id['term_id'];
 			} else {
-				printf( __( 'Failed to import post tag %s', 'pojo-importer' ), esc_html($tag['tag_name']) );
+				printf( __( 'Failed to import post tag %s', 'wordpress-importer' ), esc_html($tag['tag_name']) );
 				if ( defined('IMPORT_DEBUG') && IMPORT_DEBUG )
 					echo ': ' . $id->get_error_message();
 				echo '<br />';
 				continue;
 			}
+
+			$this->process_termmeta( $tag, $id['term_id'] );
 		}
 
 		unset( $this->tags );
@@ -500,6 +504,7 @@ class WP_Import extends WP_Importer {
 				$parent = term_exists( $term['term_parent'], $term['term_taxonomy'] );
 				if ( is_array( $parent ) ) $parent = $parent['term_id'];
 			}
+			$term = wp_slash( $term );
 			$description = isset( $term['term_description'] ) ? $term['term_description'] : '';
 			$termarr = array( 'slug' => $term['slug'], 'description' => $description, 'parent' => intval($parent) );
 
@@ -508,15 +513,78 @@ class WP_Import extends WP_Importer {
 				if ( isset($term['term_id']) )
 					$this->processed_terms[intval($term['term_id'])] = $id['term_id'];
 			} else {
-				printf( __( 'Failed to import %s %s', 'pojo-importer' ), esc_html($term['term_taxonomy']), esc_html($term['term_name']) );
+				printf( __( 'Failed to import %s %s', 'wordpress-importer' ), esc_html($term['term_taxonomy']), esc_html($term['term_name']) );
 				if ( defined('IMPORT_DEBUG') && IMPORT_DEBUG )
 					echo ': ' . $id->get_error_message();
 				echo '<br />';
 				continue;
 			}
+
+			$this->process_termmeta( $term, $id['term_id'] );
 		}
 
 		unset( $this->terms );
+	}
+
+	/**
+	 * Add metadata to imported term.
+	 *
+	 * @since 0.6.2
+	 *
+	 * @param array $term    Term data from WXR import.
+	 * @param int   $term_id ID of the newly created term.
+	 */
+	protected function process_termmeta( $term, $term_id ) {
+		if ( ! isset( $term['termmeta'] ) ) {
+			$term['termmeta'] = array();
+		}
+
+		/**
+		 * Filters the metadata attached to an imported term.
+		 *
+		 * @since 0.6.2
+		 *
+		 * @param array $termmeta Array of term meta.
+		 * @param int   $term_id  ID of the newly created term.
+		 * @param array $term     Term data from the WXR import.
+		 */
+		$term['termmeta'] = apply_filters( 'wp_import_term_meta', $term['termmeta'], $term_id, $term );
+
+		if ( empty( $term['termmeta'] ) ) {
+			return;
+		}
+
+		foreach ( $term['termmeta'] as $meta ) {
+			/**
+			 * Filters the meta key for an imported piece of term meta.
+			 *
+			 * @since 0.6.2
+			 *
+			 * @param string $meta_key Meta key.
+			 * @param int    $term_id  ID of the newly created term.
+			 * @param array  $term     Term data from the WXR import.
+			 */
+			$key = apply_filters( 'import_term_meta_key', $meta['key'], $term_id, $term );
+			if ( ! $key ) {
+				continue;
+			}
+
+			// Export gets meta straight from the DB so could have a serialized string
+			$value = maybe_unserialize( $meta['value'] );
+
+			add_term_meta( $term_id, $key, $value );
+
+			/**
+			 * Fires after term meta is imported.
+			 *
+			 * @since 0.6.2
+			 *
+			 * @param int    $term_id ID of the newly created term.
+			 * @param string $key     Meta key.
+			 * @param mixed  $value   Meta value.
+			 */
+			do_action( 'import_term_meta', $term_id, $key, $value );
+		}
 	}
 
 	/**
@@ -534,7 +602,7 @@ class WP_Import extends WP_Importer {
 			$post = apply_filters( 'wp_import_post_data_raw', $post );
 
 			if ( ! post_type_exists( $post['post_type'] ) ) {
-				printf( __( 'Failed to import &#8220;%s&#8221;: Invalid post type %s', 'pojo-importer' ),
+				printf( __( 'Failed to import &#8220;%s&#8221;: Invalid post type %s', 'wordpress-importer' ),
 					esc_html($post['post_title']), esc_html($post['post_type']) );
 				echo '<br />';
 				do_action( 'wp_import_post_exists', $post );
@@ -555,10 +623,26 @@ class WP_Import extends WP_Importer {
 			$post_type_object = get_post_type_object( $post['post_type'] );
 
 			$post_exists = post_exists( $post['post_title'], '', $post['post_date'] );
+
+			/**
+			* Filter ID of the existing post corresponding to post currently importing.
+			*
+			* Return 0 to force the post to be imported. Filter the ID to be something else
+			* to override which existing post is mapped to the imported post.
+			*
+			* @see post_exists()
+			* @since 0.6.2
+			*
+			* @param int   $post_exists  Post ID, or 0 if post did not exist.
+			* @param array $post         The post array to be inserted.
+			*/
+			$post_exists = apply_filters( 'wp_import_existing_post', $post_exists, $post );
+
 			if ( $post_exists && get_post_type( $post_exists ) == $post['post_type'] ) {
-				printf( __('%s &#8220;%s&#8221; already exists.', 'pojo-importer'), $post_type_object->labels->singular_name, esc_html($post['post_title']) );
+				printf( __('%s &#8220;%s&#8221; already exists.', 'wordpress-importer'), $post_type_object->labels->singular_name, esc_html($post['post_title']) );
 				echo '<br />';
 				$comment_post_ID = $post_id = $post_exists;
+				$this->processed_posts[ intval( $post['post_id'] ) ] = intval( $post_exists );
 			} else {
 				$post_parent = (int) $post['post_parent'];
 				if ( $post_parent ) {
@@ -592,6 +676,8 @@ class WP_Import extends WP_Importer {
 				$original_post_ID = $post['post_id'];
 				$postdata = apply_filters( 'wp_import_post_data_processed', $postdata, $post );
 
+				$postdata = wp_slash( $postdata );
+
 				if ( 'attachment' == $postdata['post_type'] ) {
 					$remote_url = ! empty($post['attachment_url']) ? $post['attachment_url'] : $post['guid'];
 
@@ -615,7 +701,7 @@ class WP_Import extends WP_Importer {
 				}
 
 				if ( is_wp_error( $post_id ) ) {
-					printf( __( 'Failed to import %s &#8220;%s&#8221;', 'pojo-importer' ),
+					printf( __( 'Failed to import %s &#8220;%s&#8221;', 'wordpress-importer' ),
 						$post_type_object->labels->singular_name, esc_html($post['post_title']) );
 					if ( defined('IMPORT_DEBUG') && IMPORT_DEBUG )
 						echo ': ' . $post_id->get_error_message();
@@ -649,7 +735,7 @@ class WP_Import extends WP_Importer {
 							$term_id = $t['term_id'];
 							do_action( 'wp_import_insert_term', $t, $term, $post_id, $post );
 						} else {
-							printf( __( 'Failed to import %s %s', 'pojo-importer' ), esc_html($taxonomy), esc_html($term['name']) );
+							printf( __( 'Failed to import %s %s', 'wordpress-importer' ), esc_html($taxonomy), esc_html($term['name']) );
 							if ( defined('IMPORT_DEBUG') && IMPORT_DEBUG )
 								echo ': ' . $t->get_error_message();
 							echo '<br />';
@@ -780,14 +866,14 @@ class WP_Import extends WP_Importer {
 
 		// no nav_menu term associated with this menu item
 		if ( ! $menu_slug ) {
-			_e( 'Menu item skipped due to missing menu slug', 'pojo-importer' );
+			_e( 'Menu item skipped due to missing menu slug', 'wordpress-importer' );
 			echo '<br />';
 			return;
 		}
 
 		$menu_id = term_exists( $menu_slug, 'nav_menu' );
 		if ( ! $menu_id ) {
-			printf( __( 'Menu item skipped due to invalid menu slug: %s', 'pojo-importer' ), esc_html( $menu_slug ) );
+			printf( __( 'Menu item skipped due to invalid menu slug: %s', 'wordpress-importer' ), esc_html( $menu_slug ) );
 			echo '<br />';
 			return;
 		} else {
@@ -850,7 +936,7 @@ class WP_Import extends WP_Importer {
 	function process_attachment( $post, $url ) {
 		if ( ! $this->fetch_attachments )
 			return new WP_Error( 'attachment_processing_error',
-				__( 'Fetching attachments is not enabled', 'pojo-importer' ) );
+				__( 'Fetching attachments is not enabled', 'wordpress-importer' ) );
 
 		// if the URL is absolute, but does not contain address, then upload it assuming base_site_url
 		if ( preg_match( '|^/[\w\W]+$|', $url ) )
@@ -863,7 +949,7 @@ class WP_Import extends WP_Importer {
 		if ( $info = wp_check_filetype( $upload['file'] ) )
 			$post['post_mime_type'] = $info['type'];
 		else
-			return new WP_Error( 'attachment_processing_error', __('Invalid file type', 'pojo-importer') );
+			return new WP_Error( 'attachment_processing_error', __('Invalid file type', 'wordpress-importer') );
 
 		$post['guid'] = $upload['url'];
 
@@ -907,31 +993,31 @@ class WP_Import extends WP_Importer {
 		// request failed
 		if ( ! $headers ) {
 			@unlink( $upload['file'] );
-			return new WP_Error( 'import_file_error', __('Remote server did not respond', 'pojo-importer') );
+			return new WP_Error( 'import_file_error', __('Remote server did not respond', 'wordpress-importer') );
 		}
 
 		// make sure the fetch was successful
 		if ( $headers['response'] != '200' ) {
 			@unlink( $upload['file'] );
-			return new WP_Error( 'import_file_error', sprintf( __('Remote server returned error response %1$d %2$s', 'pojo-importer'), esc_html($headers['response']), get_status_header_desc($headers['response']) ) );
+			return new WP_Error( 'import_file_error', sprintf( __('Remote server returned error response %1$d %2$s', 'wordpress-importer'), esc_html($headers['response']), get_status_header_desc($headers['response']) ) );
 		}
 
 		$filesize = filesize( $upload['file'] );
 
 		if ( isset( $headers['content-length'] ) && $filesize != $headers['content-length'] ) {
 			@unlink( $upload['file'] );
-			return new WP_Error( 'import_file_error', __('Remote file is incorrect size', 'pojo-importer') );
+			return new WP_Error( 'import_file_error', __('Remote file is incorrect size', 'wordpress-importer') );
 		}
 
 		if ( 0 == $filesize ) {
 			@unlink( $upload['file'] );
-			return new WP_Error( 'import_file_error', __('Zero size file downloaded', 'pojo-importer') );
+			return new WP_Error( 'import_file_error', __('Zero size file downloaded', 'wordpress-importer') );
 		}
 
 		$max_size = (int) $this->max_attachment_size();
 		if ( ! empty( $max_size ) && $filesize > $max_size ) {
 			@unlink( $upload['file'] );
-			return new WP_Error( 'import_file_error', sprintf(__('Remote file is too large, limit is %s', 'pojo-importer'), size_format($max_size) ) );
+			return new WP_Error( 'import_file_error', sprintf(__('Remote file is too large, limit is %s', 'wordpress-importer'), size_format($max_size) ) );
 		}
 
 		// keep track of the old and new urls so we can substitute them later
@@ -1030,14 +1116,14 @@ class WP_Import extends WP_Importer {
 	function header() {
 		echo '<div class="wrap">';
 		screen_icon();
-		echo '<h2>' . __( 'Import WordPress', 'pojo-importer' ) . '</h2>';
+		echo '<h2>' . __( 'Import WordPress', 'wordpress-importer' ) . '</h2>';
 
 		$updates = get_plugin_updates();
 		$basename = plugin_basename(__FILE__);
 		if ( isset( $updates[$basename] ) ) {
 			$update = $updates[$basename];
 			echo '<div class="error"><p><strong>';
-			printf( __( 'A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files.', 'pojo-importer' ), $update->update->new_version );
+			printf( __( 'A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files.', 'wordpress-importer' ), $update->update->new_version );
 			echo '</strong></p></div>';
 		}
 	}
@@ -1052,8 +1138,8 @@ class WP_Import extends WP_Importer {
 	 */
 	function greet() {
 		echo '<div class="narrow">';
-		echo '<p>'.__( 'Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site.', 'pojo-importer' ).'</p>';
-		echo '<p>'.__( 'Choose a WXR (.xml) file to upload, then click Upload file and import.', 'pojo-importer' ).'</p>';
+		echo '<p>'.__( 'Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site.', 'wordpress-importer' ).'</p>';
+		echo '<p>'.__( 'Choose a WXR (.xml) file to upload, then click Upload file and import.', 'wordpress-importer' ).'</p>';
 		wp_import_upload_form( 'admin.php?import=wordpress&amp;step=1' );
 		echo '</div>';
 	}
@@ -1117,4 +1203,16 @@ class WP_Import extends WP_Importer {
 	}
 }
 
-} // class_exists( 'WP_Importer' )/ class_exists( 'WP_Importer' )/ class_exists( 'WP_Importer' )/ class_exists( 'WP_Importer' )
+} // class_exists( 'WP_Importer' )
+
+function wordpress_importer_init() {
+	load_plugin_textdomain( 'wordpress-importer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
+	/**
+	 * WordPress Importer object for registering the import callback
+	 * @global WP_Import $wp_import
+	 */
+	$GLOBALS['wp_import'] = new WP_Import();
+	register_importer( 'wordpress', 'WordPress', __('Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file.', 'wordpress-importer'), array( $GLOBALS['wp_import'], 'dispatch' ) );
+}
+add_action( 'admin_init', 'wordpress_importer_init' );
