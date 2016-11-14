@@ -3,7 +3,7 @@ Contributors: pojo.me, KingYes, ariel.k
 Tags: Import, Importer,
 Requires at least: 4.1
 Tested up to: 4.3.1
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 
 Import posts, pages, widgets, menus, customizer, front page and more to your theme which works with Pojo Framework.
