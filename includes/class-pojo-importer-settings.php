@@ -319,15 +319,6 @@ class Pojo_Importer_Settings {
 				</label>
 			</div>
 
-			<?php if ( Pojo_Compatibility::is_revslider_installer() ) : ?>
-				<div>
-					<label>
-						<input type="checkbox" name="revslider" value="yes" checked />
-						<?php _e( 'Revolution Slider', 'pojo-importer' ); ?>
-					</label>
-				</div>
-			<?php endif; ?>
-
 			<div>
 				<p style="color: #ff0000;"><?php _e( 'Please Note: If there is content in the existing site, you may not want to import the demo content, it could change the content structure.', 'pojo-importer' ); ?></p>
 				<p><button type="submit" class="button button-primary"><?php _e( 'Import', 'pojo-importer' ); ?></button></p>
@@ -509,11 +500,6 @@ class Pojo_Importer_Settings {
 			// Set Home Page
 			$this->import_front_page();
 		}
-
-		if ( isset( $_POST['revslider'] ) && 'yes' === $_POST['revslider'] ) {
-			// RevSlider
-			$this->import_revslider( $_POST['lang'] );
-		}
 		
 		// Remove temp files
 		$this->remove_temp_files();
@@ -577,25 +563,6 @@ class Pojo_Importer_Settings {
 		if ( ! is_null( $home_page_id ) ) {
 			update_option( 'show_on_front', 'page' );
 			update_option( 'page_on_front', $home_page_id );
-		}
-	}
-
-	public function import_revslider( $lang ) {
-		if ( ! Pojo_Compatibility::is_revslider_installer() )
-			return;
-
-		$files = $this->get_files_list();
-		if ( empty( $files ) )
-			return;
-
-		if ( ! isset( $files[ $lang ] ) || ! isset( $files[ $lang ]['revslider'] ) )
-			return;
-
-		$revslider = new RevSlider();
-		
-		foreach ( $files[ $lang ]['revslider'] as $slider ) {
-			$temp_file = $this->_upload_file( $slider );
-			$revslider->importSliderFromPost( 'true', 'true', $temp_file );
 		}
 	}
 
