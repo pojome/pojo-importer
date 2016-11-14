@@ -1,5 +1,5 @@
 # Pojo Importer #
-[![Dependency Status](https://david-dm.org/pojome/pojo-importer/dev-status.svg)](https://david-dm.org/pojome/pojo-importer#info=devDependencies) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Dependency Status](https://david-dm.org/pojome/pojo-importer/dev-status.svg)](https://david-dm.org/pojome/pojo-importer#info=devDependencies) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com/)
 
 **Contributors:** pojo.me, KingYes, ariel.k  
 **Tags:** Import, Importer,  
