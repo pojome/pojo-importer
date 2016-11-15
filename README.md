@@ -4,7 +4,7 @@
 **Contributors:** pojo.me, KingYes, ariel.k  
 **Tags:** Import, Importer,  
 **Requires at least:** 4.1  
-**Tested up to:** 4.3.1  
+**Tested up to:** 4.7  
 **Stable tag:** 1.2.1  
 **License:** GPLv2 or later  
 
@@ -50,6 +50,10 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 1. Enjoy!
 
 ## Changelog ##
+
+### 1.2.1 ###
+* Tweak! - Updated WordPress Importer 0.6.3
+* Tweak! - Removed Revolution Slider option
 
 ### 1.2.0 ###
 * New! - Added manual installation of the dummy data
