@@ -51,6 +51,9 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 
 ## Changelog ##
 
+### 1.2.2 ###
+* Fixed! - From the new version of WP Importer lib
+
 ### 1.2.1 ###
 * Tweak! - Updated WordPress Importer 0.6.3
 * Tweak! - Removed Revolution Slider option

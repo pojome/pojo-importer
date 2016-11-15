@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-importer 1.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-15 13:57+0200\n"
+"POT-Creation-Date: 2016-11-15 15:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -416,12 +416,6 @@ msgstr ""
 
 #: includes/wordpress-importer/wordpress-importer.php:1142
 msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
-msgstr ""
-
-#: includes/wordpress-importer/wordpress-importer.php:1216
-msgid ""
-"Import <strong>posts, pages, comments, custom fields, categories, and tags</"
-"strong> from a WordPress export file."
 msgstr ""
 
 #: pojo-importer.php:63 pojo-importer.php:74
