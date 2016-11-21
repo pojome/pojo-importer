@@ -500,6 +500,8 @@ class Pojo_Importer_Settings {
 			// Set Home Page
 			$this->import_front_page();
 		}
+
+		$this->elementor_disable_global_schemes();
 		
 		// Remove temp files
 		$this->remove_temp_files();
@@ -625,6 +627,11 @@ class Pojo_Importer_Settings {
 		}
 	}
 
+	private function elementor_disable_global_schemes() {
+		update_option( 'elementor_disable_color_schemes', 'yes' );
+		update_option( 'elementor_disable_typography_schemes', 'yes' );
+	}
+
 	public function __construct() {
 		if ( ! current_user_can( $this->_capability ) )
 			return;
@@ -638,5 +645,4 @@ class Pojo_Importer_Settings {
 
 		add_action( 'wp_ajax_pojo_do_import', array( &$this, 'ajax_pojo_do_import' ) );
 	}
-	
 }
