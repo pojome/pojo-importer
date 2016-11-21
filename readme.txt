@@ -49,6 +49,9 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 
 == Changelog ==
 
+= 1.2.3 =
+* Tweak! - Force Disable Color Palettes and Default Fonts for Elementor
+
 = 1.2.2 =
 * Fixed! - From the new version of WP Importer lib
 
