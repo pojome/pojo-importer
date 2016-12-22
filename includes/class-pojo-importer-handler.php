@@ -109,5 +109,57 @@ class Pojo_Importer_Handler extends WP_Import {
 		
 		return $this->placeholder_image_id;
 	}
+
+	public function reset_galleries_placeholders() {
+		global $wpdb;
+
+		$placeholder_ids = $this->generate_placeholders();
+		if ( ! empty( $placeholder_ids ) ) {
+			$meta_key      = 'gallery_gallery';
+			$galleries_ids = $wpdb->get_col(
+				$wpdb->prepare(
+					'SELECT `post_id` FROM `%1$s`
+							WHERE `meta_key` LIKE \'%2$s\'
+						;',
+					$wpdb->postmeta,
+					$meta_key
+				)
+			);
+
+			if ( ! empty( $galleries_ids ) ) {
+				foreach ( $galleries_ids as $gallery_id ) {
+					update_post_meta( $gallery_id, $meta_key, implode( ',', $placeholder_ids ) );
+				}
+			}
+		}
+	}
 	
+	public function reset_slideshows_placeholders() {
+		global $wpdb;
+
+		$slides = $wpdb->get_col(
+			"SELECT `meta_key` FROM `{$wpdb->postmeta}`
+				WHERE `meta_key` REGEXP 'slide_slides\\\\[.+\\\\]\\\\[image\\\\]';"
+		);
+		
+		if ( empty( $slides ) ) {
+			return;
+		}
+
+		$placeholder_ids = $this->generate_placeholders();
+		if ( empty( $placeholder_ids ) ) {
+			return;
+		}
+
+		foreach ( $slides as $slide_meta_key ) {
+			shuffle( $placeholder_ids );
+			$placeholder_id = $placeholder_ids[0];
+			
+			$wpdb->update(
+				$wpdb->postmeta,
+				array( 'meta_value' => $placeholder_id ),
+				array( 'meta_key' => $slide_meta_key )
+			);
+		}
+	}
 }

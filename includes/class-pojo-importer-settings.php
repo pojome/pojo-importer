@@ -581,25 +581,8 @@ class Pojo_Importer_Settings {
 		$import_log = ob_get_clean();
 
 		// Galleries Placeholders
-		$placeholder_ids = $import->generate_placeholders();
-		if ( ! empty( $placeholder_ids ) ) {
-			$meta_key      = 'gallery_gallery';
-			$galleries_ids = $wpdb->get_col(
-				$wpdb->prepare(
-					'SELECT `post_id` FROM `%1$s`
-							WHERE `meta_key` LIKE \'%2$s\'
-						;',
-					$wpdb->postmeta,
-					$meta_key
-				)
-			);
-
-			if ( ! empty( $galleries_ids ) ) {
-				foreach ( $galleries_ids as $gallery_id ) {
-					update_post_meta( $gallery_id, $meta_key, implode( ',', $placeholder_ids ) );
-				}
-			}
-		}
+		$import->reset_galleries_placeholders();
+		$import->reset_slideshows_placeholders();
 
 		update_option( 'pojo_has_import_content_data_' . strtolower( Pojo_Core::instance()->licenses->updater->theme_name ), 'true' );
 
