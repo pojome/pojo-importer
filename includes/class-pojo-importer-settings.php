@@ -582,6 +582,7 @@ class Pojo_Importer_Settings {
 
 		// Galleries Placeholders
 		$import->reset_galleries_placeholders();
+		// Slideshows Placeholders
 		$import->reset_slideshows_placeholders();
 
 		update_option( 'pojo_has_import_content_data_' . strtolower( Pojo_Core::instance()->licenses->updater->theme_name ), 'true' );
