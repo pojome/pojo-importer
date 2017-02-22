@@ -260,6 +260,7 @@ class Pojo_Importer_Settings {
 	
 	protected function _print_setting_page_main() {
 		$this->_print_footer_scripts = true;
+		$is_elementor_active = did_action( 'elementor/loaded' );
 		?>
 		<h2><?php _e( 'Demo Import', 'pojo-importer' ); ?></h2>
 
@@ -268,6 +269,15 @@ class Pojo_Importer_Settings {
 		<p><?php printf( __( 'If you want to import all of the <a href="%s" target="_blank">WooCommerce</a> content, you must install the plugin before importing.', 'pojo-importer' ), 'https://wordpress.org/plugins/woocommerce/' ); ?></p>
 
 		<p><?php _e( 'Note: Due to copyright reasons, demo images will be replaced a placeholder image.', 'pojo-importer' ); ?></p>
+
+		<?php if ( ! $is_elementor_active ) :
+			$install_plugins_link = add_query_arg( 'page', TGM_Plugin_Activation::get_instance()->menu, admin_url( 'admin.php' ) );
+			?>
+		<div style="background-color: #fff;margin: 15px 0;padding: 1px 12px;box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);">
+			<p style="font-size: 17px; font-weight: bold;"><?php printf( __( 'Please <a href="%s">activate the Elementor plugin</a> before importing the demo content.', 'pojo-importer' ), $install_plugins_link ); ?></p>
+		</div>
+			<?php return; ?>
+		<?php endif; ?>
 
 		<form id="pojo-importer-content">
 			<input type="hidden" name="action" value="pojo_do_import" />
