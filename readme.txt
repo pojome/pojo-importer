@@ -49,6 +49,9 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 
 == Changelog ==
 
+= 1.2.5 =
+* Tweak! - Disable import demo until active Elementor
+
 = 1.2.4 =
 * Tweak! - Replace all slideshow's thumbnails to placeholders
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-importer 1.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-22 18:10+0200\n"
+"POT-Creation-Date: 2017-02-22 18:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,7 +62,7 @@ msgid ""
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:269
-#: includes/class-pojo-importer-settings.php:359
+#: includes/class-pojo-importer-settings.php:361
 #, php-format
 msgid ""
 "If you want to import all of the <a href=\"%s\" target=\"_blank"
@@ -70,55 +70,55 @@ msgid ""
 msgstr ""
 
 #: includes/class-pojo-importer-settings.php:271
-#: includes/class-pojo-importer-settings.php:361
+#: includes/class-pojo-importer-settings.php:363
 msgid ""
 "Note: Due to copyright reasons, demo images will be replaced a placeholder "
 "image."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:275
+#: includes/class-pojo-importer-settings.php:277
 #, php-format
 msgid ""
 "Please <a href=\"%s\">activate the Elementor plugin</a> before importing the "
 "demo content."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:286
+#: includes/class-pojo-importer-settings.php:288
 msgid "Choose your language"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:298
+#: includes/class-pojo-importer-settings.php:300
 msgid "The demo content (Posts, Pages, Galleries, Slideshows, WooCommerce)"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:305
+#: includes/class-pojo-importer-settings.php:307
 msgid "Widgets"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:312
+#: includes/class-pojo-importer-settings.php:314
 msgid "Menus"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:319
+#: includes/class-pojo-importer-settings.php:321
 msgid "Customizer"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:326
+#: includes/class-pojo-importer-settings.php:328
 msgid "Front Page"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:331
-#: includes/class-pojo-importer-settings.php:373
+#: includes/class-pojo-importer-settings.php:333
+#: includes/class-pojo-importer-settings.php:375
 msgid ""
 "Please Note: If there is content in the existing site, you may not want to "
 "import the demo content, it could change the content structure."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:332
+#: includes/class-pojo-importer-settings.php:334
 msgid "Import"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:337
+#: includes/class-pojo-importer-settings.php:339
 #, php-format
 msgid ""
 "Problem with an auto demo import? Please go to the <a href=\"%s\">Demo "
@@ -126,86 +126,86 @@ msgid ""
 "computer"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:346
+#: includes/class-pojo-importer-settings.php:348
 msgid "Demo Import (Manual Installation)"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:346
+#: includes/class-pojo-importer-settings.php:348
 msgid "Back to Auto Installation"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:349
+#: includes/class-pojo-importer-settings.php:351
 msgid ""
 "Using the demo import allows you to import all the demo content (Posts, "
 "Pages, Galleries, Slideshows, WooCommerce, Menus and Front Page), Customizer "
 "and Widgets."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:351
+#: includes/class-pojo-importer-settings.php:353
 msgid ""
 "<strong>Need Help?</strong> Please go to <a href=\"http://pojo.me/go/demo-"
 "import-guide/\">Demo Import Guide</a> to learn more."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:357
-#: includes/class-pojo-importer-settings.php:375
+#: includes/class-pojo-importer-settings.php:359
+#: includes/class-pojo-importer-settings.php:377
 msgid "Import Content"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:359
+#: includes/class-pojo-importer-settings.php:361
 msgid ""
 "The demo content: Posts, Pages, Galleries, Slideshows, WooCommerce, Front "
 "Page and Menus."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:363
+#: includes/class-pojo-importer-settings.php:365
 msgid ""
 "Upload content file and we'll import the content into this site. Choose a "
 "content-en.xml file to upload, then click Import Content."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:369
+#: includes/class-pojo-importer-settings.php:371
 msgid "Choose an XML file:"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:382
-#: includes/class-pojo-importer-settings.php:396
+#: includes/class-pojo-importer-settings.php:384
+#: includes/class-pojo-importer-settings.php:398
 msgid "Import Customizer"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:384
+#: includes/class-pojo-importer-settings.php:386
 msgid ""
 "Upload your Customizer Settings file and we'll import the options into this "
 "site. Choose a customizer-en.json file to upload, then click Import "
 "Customizer."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:391
-#: includes/class-pojo-importer-settings.php:410
+#: includes/class-pojo-importer-settings.php:393
+#: includes/class-pojo-importer-settings.php:412
 msgid "Choose a JSON file:"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:403
-#: includes/class-pojo-importer-settings.php:415
+#: includes/class-pojo-importer-settings.php:405
+#: includes/class-pojo-importer-settings.php:417
 msgid "Import Widgets"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:405
+#: includes/class-pojo-importer-settings.php:407
 msgid ""
 "Upload widgets file and we'll import the content into this site. Choose a "
 "widgets-en.json file to upload, then click Import Widgets."
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:432
+#: includes/class-pojo-importer-settings.php:434
 msgid "Loading"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:449
+#: includes/class-pojo-importer-settings.php:451
 #, php-format
 msgid "All done. <a href=\"%s\">Have fun!</a>"
 msgstr ""
 
-#: includes/class-pojo-importer-settings.php:476
+#: includes/class-pojo-importer-settings.php:478
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
