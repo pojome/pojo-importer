@@ -1,7 +1,7 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class Pojo_Importer_Handler extends WP_Import {
+class Pojo_Importer_Handler extends Pojo_WP_Import {
 
 	const PLACEHOLDER_SLUG = 'pojo-placeholder';
 

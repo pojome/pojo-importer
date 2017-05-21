@@ -49,6 +49,9 @@ Would you like to contribute to Pojo Importer? You are more than welcome to subm
 
 == Changelog ==
 
+= 1.2.6 =
+* Tweak! - Added prefix classes name
+
 = 1.2.5 =
 * Tweak! - Disable import demo until active Elementor
 

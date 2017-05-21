@@ -35,7 +35,7 @@ require dirname( __FILE__ ) . '/parsers.php';
  * @subpackage Importer
  */
 if ( class_exists( 'WP_Importer' ) ) {
-class WP_Import extends WP_Importer {
+class Pojo_WP_Import extends WP_Importer {
 	var $max_wxr_version = 1.2; // max. supported WXR version
 
 	var $id; // WXR attachment ID
@@ -1108,7 +1108,7 @@ class WP_Import extends WP_Importer {
 	 * @return array Information gathered from the WXR file
 	 */
 	function parse( $file ) {
-		$parser = new WXR_Parser();
+		$parser = new Pojo_WXR_Parser();
 		return $parser->parse( $file );
 	}
 
@@ -1203,4 +1203,4 @@ class WP_Import extends WP_Importer {
 	}
 }
 
-} // class_exists( 'WP_Importer' )
+} // class_exists( 'Pojo_WP_Importer' )
