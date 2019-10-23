@@ -2,7 +2,7 @@
 Contributors: pojo.me, KingYes, ariel.k
 Tags: Import, Importer,
 Requires at least: 4.1
-Tested up to: 5.2
+Tested up to: 5.3
 Stable tag: 1.2.6
 License: GPLv2 or later
 
